@@ -2,11 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Home pejcz</title>
+		<title>NOTES</title>
 	</head>
 	<body>
-	HOMEPAGE
-	<a href=/
+	NOTES
+	
+	<#list noteList as notes>
+		${notes.message!""}
+	</#list>
 	
 	</body>
 </html>

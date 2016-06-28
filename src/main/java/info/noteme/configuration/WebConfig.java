@@ -21,7 +21,7 @@ import freemarker.template.utility.XmlEscape;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "info.noteme", "info.noteme.repository" })
+@ComponentScan({ "info.noteme" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 	/*
 	 * @Bean public ViewResolver viewResolver() { InternalResourceViewResolver

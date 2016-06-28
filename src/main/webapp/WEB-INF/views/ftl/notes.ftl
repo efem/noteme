@@ -5,9 +5,10 @@
 		<title>NOTES</title>
 	</head>
 	<body>
-	NOTES
-	
+		NOTES
+	<br />
 	<#list noteList as notes>
+		<br />
 		${notes.message!""}
 	</#list>
 	

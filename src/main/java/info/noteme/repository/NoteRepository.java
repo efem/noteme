@@ -12,4 +12,5 @@ import info.noteme.interf.Note;
 
 public interface NoteRepository {
 	List<Note> findNotes(long max, int count);
+	Note findOne(long id);
 }

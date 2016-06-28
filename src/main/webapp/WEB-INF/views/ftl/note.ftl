@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Home pejcz</title>
+		<title>NOTES</title>
 	</head>
 	<body>
-	HOMEPAGE
-	<a href="notes">show notes</a>
+	 <#if showNote??>${showNote.message!"dupa"}<#else>"brak notatki"</#if>
+	
 	
 	</body>
 </html>

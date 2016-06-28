@@ -35,7 +35,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		resolver.setOrder(1);
 		resolver.setCache(false);
-		//resolver.setPrefix("/WEB-INF/views/ftl/");
 		resolver.setPrefix("");
 		resolver.setSuffix(".ftl");
 		return resolver;
@@ -59,7 +58,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		variables.put("xml_escape", fmXmlEscape);
 		config.setServletContext(applicationContext.getServletContext());
 		config.setFreemarkerVariables(variables);
-		 config.setTemplateLoaderPath("/WEB-INF/views/ftl");
+		config.setTemplateLoaderPath("/WEB-INF/views/ftl");
 		config.setFreemarkerSettings(property);
 		return config;
 	}

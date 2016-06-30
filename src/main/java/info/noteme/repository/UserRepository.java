@@ -6,7 +6,7 @@ import info.noteme.domain.User;
 
 public interface UserRepository {
 
-	User getUser(User username);
+	User getUser(String username);
 	
 	List<User> getAllUsers();
 	

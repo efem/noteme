@@ -7,12 +7,12 @@
 	<body>
  <form name="user" method="POST">
   First name:<br>
-  <input type="text" name="name"><br>
+  <input type="text" name="user.username"><br>
   Last name:<br>
-  <input type="text" name="email">
+  <input type="text" name="user.email">
   <br>
   Password<br>
-  <input type="password" name="password">
+  <input type="password" name="user.password">
   <br>
   Repeat password:<br>
   <input type="password" name="password_repeat">

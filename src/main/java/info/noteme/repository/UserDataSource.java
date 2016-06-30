@@ -9,12 +9,8 @@ import info.noteme.domain.User;
 
 @Repository
 public class UserDataSource implements UserRepository {
-
-	@Override
-	public User getUser(User username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	User user;
+	
 
 	@Override
 	public List<User> getAllUsers() {
@@ -24,9 +20,15 @@ public class UserDataSource implements UserRepository {
 
 	@Override
 	public User save(User user) {
-		
-		System.out.println("SAVING USER");
+		//user = new User();
+		System.out.println("SAVING USER" + user);
 		return user;
+	}
+
+	@Override
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

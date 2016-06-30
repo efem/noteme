@@ -27,7 +27,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processRegistration(@ModelAttribute("user") User user) {
+	public String processRegistration(@ModelAttribute User user) {
 		System.out.println("GOT FROM FORM: " + user.getUsername());
 		userRepository.save(user);
 		return "redirect:/user/" + user.getUsername();

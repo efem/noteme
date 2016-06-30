@@ -9,7 +9,7 @@ import info.noteme.domain.User;
 
 @Repository
 public class UserDataSource implements UserRepository {
-	User user;
+	private static User thisUser;
 	
 
 	@Override
@@ -20,15 +20,15 @@ public class UserDataSource implements UserRepository {
 
 	@Override
 	public User save(User user) {
-		//user = new User();
-		System.out.println("SAVING USER" + user);
+		thisUser = user;
+		System.out.println("SAVING USER" + thisUser);
 		return user;
 	}
 
 	@Override
 	public User getUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return thisUser;
 	}
 
 }

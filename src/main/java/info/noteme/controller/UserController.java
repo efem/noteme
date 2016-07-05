@@ -26,14 +26,15 @@ public class UserController {
 		 this.userRepository = userRepository;
 	}
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public String showRegsitrationForm() {
+	public String showRegsitrationForm(@ModelAttribute("user") User user) {
 		return "registerForm";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processRegistration(@Valid User user, BindingResult errors) {
+	public String processRegistration(@Valid User user, Errors errors) {
 		if (errors.hasErrors()) {
 			System.out.println("BLEDY WALIDACJI");
+			System.out.println(errors.toString());
 			return "registerForm";
 		}
 		System.out.println("GOT FROM FORM: " + user.getUsername());

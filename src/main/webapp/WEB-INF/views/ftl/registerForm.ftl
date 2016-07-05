@@ -8,13 +8,14 @@
 	</head>
 	<body>
  <form name="user" method="POST">
+ <@spring.showErrors '*', 'errors' />
   First name:<br>
-  <input type="text" name="username" /><br>
+  <@spring.formInput "user.username" /><@spring.showErrors "<br />", "error" /><br>
   Last name:<br>
-  <input type="text" name="email" />
+  <@spring.formInput "user.email" /><@spring.showErrors "<br>"/><br>
   <br>
   Password<br>
-  <input type="password" name="password" />
+<@spring.formInput "user.password" /><@spring.showErrors "<br>"/><br>
   <br>
   Repeat password:<br>
   <input type="password" name="password_repeat" />

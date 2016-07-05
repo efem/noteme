@@ -21,7 +21,7 @@ public class User {
 	
 	
 	public User() {
-		this("Abc", "Xyz", "qaz");
+		this(null, null, null);
 	}
 	
 	public User(String username, String email, String password) {

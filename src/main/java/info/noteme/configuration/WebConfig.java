@@ -2,6 +2,7 @@ package info.noteme.configuration;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -14,10 +15,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import freemarker.template.TemplateException;
+import freemarker.template.utility.ClassUtil;
 import freemarker.template.utility.XmlEscape;
 
 @Configuration
@@ -62,8 +65,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		config.setFreemarkerVariables(variables);
 		config.setTemplateLoaderPath("/WEB-INF/views/ftl");
 		config.setFreemarkerSettings(property);
+
 		return config;
 	}
+	@Bean
+    SessionLocaleResolver localeResolver() {
+        // Enable the SessionLocaleResolver
+        // Even if you don't localize your webapp you should still specify this
+        // so that things like numbers, dates, and currencies are formatted properly
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.US);
+
+        return localeResolver;
+    }
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

@@ -3,6 +3,7 @@ package info.noteme.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processRegistration(@ModelAttribute User user) {
+	public String processRegistration(User user) {
 		System.out.println("GOT FROM FORM: " + user.getUsername());
 		userRepository.save(user);
 		return "redirect:/user/" + user.getUsername();

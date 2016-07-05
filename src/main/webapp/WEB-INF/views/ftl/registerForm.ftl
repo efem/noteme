@@ -7,15 +7,15 @@
 	<body>
  <form name="user" method="POST">
   First name:<br>
-  <input type="text" name="user.username"><br>
+  <input type="text" name="username" /><br>
   Last name:<br>
-  <input type="text" name="user.email">
+  <input type="text" name="email" />
   <br>
   Password<br>
-  <input type="password" name="user.password">
+  <input type="password" name="password" />
   <br>
   Repeat password:<br>
-  <input type="password" name="password_repeat">
+  <input type="password" name="password_repeat" />
   <input type="submit" value="Register">
 </form> 
 	

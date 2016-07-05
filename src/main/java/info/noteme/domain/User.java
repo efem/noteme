@@ -3,6 +3,9 @@ package info.noteme.domain;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.validation.annotation.Validated;
+
+
 public class User {
 	@NotNull
 	@Size(min=3, max=16)

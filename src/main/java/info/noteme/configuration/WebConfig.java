@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -22,13 +23,14 @@ import freemarker.template.utility.XmlEscape;
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "info.noteme" })
+@ContextConfiguration(classes = { WebConfig.class })
 public class WebConfig extends WebMvcConfigurerAdapter {
 	/*
 	 * @Bean public ViewResolver viewResolver() { InternalResourceViewResolver
 	 * resolver = new InternalResourceViewResolver();
 	 * resolver.setPrefix("/WEB-INF/views/ftl/"); resolver.setSuffix(".ftl");
 	 * resolver.setExposeContextBeansAsAttributes(true); return resolver; }
-	 */
+	 */ 
 	
 	@Bean
 	public FreeMarkerViewResolver freemarkerViewResolver() {

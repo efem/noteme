@@ -1,4 +1,6 @@
-<#import "spring.ftl" as spring>
+<#import "spring.ftl" as spring />
+<@spring.bind "user"/>
+<@spring.showErrors '*', 'errors' />
 <html>
 	<head>
 		<meta charset="UTF-8">

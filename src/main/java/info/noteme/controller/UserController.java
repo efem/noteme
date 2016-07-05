@@ -31,8 +31,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processRegistration(@Valid User user, Errors errors) {
+	public String processRegistration(@Valid User user, BindingResult errors) {
 		if (errors.hasErrors()) {
+			System.out.println("BLEDY WALIDACJI");
 			return "registerForm";
 		}
 		System.out.println("GOT FROM FORM: " + user.getUsername());

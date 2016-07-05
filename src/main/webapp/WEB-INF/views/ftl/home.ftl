@@ -7,6 +7,7 @@
 	<body>
 	HOMEPAGE
 	<a href="notes">show notes</a>
+	<a href="user/register">new user</a>
 	
 	</body>
 </html>

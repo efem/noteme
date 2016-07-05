@@ -1,8 +1,19 @@
 package info.noteme.domain;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
+	@NotNull
+	@Size(min=3, max=16)
 	private String username;
+	
+	@NotNull
+	@Size(min=7, max=25)
 	private String email;
+	
+	@NotNull
+	@Size(min=5, max=25)
 	private String password;
 	
 	

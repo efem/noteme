@@ -1,0 +1,30 @@
+body {
+	background-color: #DAE5CA;
+	font-family: "Tahoma";
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h2 {
+	color: #394959;
+	text-align: center;
+	font-size: 30px;
+}
+
+span.error {
+	color: #ff0000;
+	font-weight: bold;
+	font-size: 12px;
+}
+.buttonHolder{
+    text-align: center;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+table tr#first {
+	border-bottom: 1px solid #008999;
+	background: #23B9B5
+}

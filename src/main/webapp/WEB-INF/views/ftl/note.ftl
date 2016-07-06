@@ -1,12 +1,5 @@
-<#import "spring.ftl" as spring>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>NOTES</title>
-	</head>
-	<body>
-	 <#if showNote??>${showNote.message!"dupa"}<#else>"brak notatki"</#if>
-	
-	
-	</body>
-</html>
+<#import "init.ftl" as init />
+<@init.pageInit title="NOTES" />
+<@init.pageBody>
+	<#if showNote??>${showNote.message!"dupa"}<#else>"brak notatki"</#if>
+</@init.pageBody>

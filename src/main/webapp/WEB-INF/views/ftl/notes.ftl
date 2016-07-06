@@ -1,16 +1,8 @@
-<#import "spring.ftl" as spring>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>NOTES</title>
-	</head>
-	<body>
-		NOTES
-	<br />
+<#import "init.ftl" as init />
+<@init.pageInit title="ALL NOTES" />
+<@init.pageBody>
 	<#list noteList as notes>
 		<br />
 		${notes.message!""}
 	</#list>
-	
-	</body>
-</html>
+</@init.pageBody>

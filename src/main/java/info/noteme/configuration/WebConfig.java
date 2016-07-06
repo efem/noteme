@@ -10,12 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
@@ -33,8 +38,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	 * resolver = new InternalResourceViewResolver();
 	 * resolver.setPrefix("/WEB-INF/views/ftl/"); resolver.setSuffix(".ftl");
 	 * resolver.setExposeContextBeansAsAttributes(true); return resolver; }
-	 */ 
-	
+	 */
+
 	@Bean
 	public FreeMarkerViewResolver freemarkerViewResolver() {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
@@ -54,31 +59,56 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public FreeMarkerConfigurer freemarkerConfig(WebApplicationContext applicationContext) throws IOException, TemplateException {
+	public FreeMarkerConfigurer freemarkerConfig(WebApplicationContext applicationContext)
+			throws IOException, TemplateException {
 		FreeMarkerConfigurer config = new FreeMarkerConfigurer();
 		Map<String, Object> variables = new HashMap<String, Object>();
 		Properties property = new Properties();
 		
+		property.setProperty("auto_import", "spring.ftl as spring");
 		property.setProperty("default_encoding", "UTF-8");
 		variables.put("xml_escape", fmXmlEscape);
 		config.setServletContext(applicationContext.getServletContext());
 		config.setFreemarkerVariables(variables);
 		config.setTemplateLoaderPath("/WEB-INF/views/ftl");
+		//config.setResourceLoader(applicationContext);
 		config.setFreemarkerSettings(property);
 
 		return config;
 	}
-	@Bean
-    SessionLocaleResolver localeResolver() {
-        // Enable the SessionLocaleResolver
-        // Even if you don't localize your webapp you should still specify this
-        // so that things like numbers, dates, and currencies are formatted properly
-        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.US);
-
-        return localeResolver;
-    }
 	
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+		
+		
+		interceptor.setParamName("lang");
+		return interceptor;
+	}
+	
+	@Bean
+	SessionLocaleResolver localeResolver() {
+		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.ENGLISH);
+		return localeResolver;
+	}
+
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		source.setBasename("i18n/msg");
+		source.setUseCodeAsDefaultMessage(true);
+		return source;
+	}
+	
+	
+/*	@Bean
+	public RequestMappingHandlerMapping  handlerMapping() {
+		RequestMappingHandlerMapping  handler = new RequestMappingHandlerMapping();
+		handler.setInterceptors(this.localeChangeInterceptor());
+		return handler;
+	}*/
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

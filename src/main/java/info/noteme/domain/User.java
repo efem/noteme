@@ -1,22 +1,28 @@
 package info.noteme.domain;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.validation.annotation.Validated;
 
 
 public class User {
+
 	@NotNull
-	@Size(min=3, max=16)
+	@Size(min=3, max=16, message="{error.username.size}")
 	private String username;
 	
 	@NotNull
-	@Size(min=7, max=25)
+	@Size(min=7, max=25, message="{error.email.size}")
 	private String email;
 	
 	@NotNull
-	@Size(min=5, max=25)
+	@Size(min=5, max=25, message="{error.password.size}")
 	private String password;
 	
 	

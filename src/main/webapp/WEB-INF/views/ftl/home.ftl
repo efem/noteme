@@ -8,6 +8,7 @@
 	HOMEPAGE
 	<a href="notes">show notes</a>
 	<a href="user/register">new user</a>
-	
+	<@spring.message code="label.webapp" /><br />
+    <@spring.message "label.webapp" />
 	</body>
 </html>

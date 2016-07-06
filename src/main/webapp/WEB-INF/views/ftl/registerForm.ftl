@@ -8,7 +8,7 @@
 	</head>
 	<body>
  <form name="user" method="POST">
- <@spring.showErrors '*', 'errors' />
+ <@spring.showErrors "<br>"/>
   First name:<br>
   <@spring.formInput "user.username" /><@spring.showErrors "<br />", "error" /><br>
   Last name:<br>

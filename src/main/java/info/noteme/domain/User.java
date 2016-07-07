@@ -1,18 +1,21 @@
 package info.noteme.domain;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PersistenceUnit;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.validation.annotation.Validated;
-
-
+@PersistenceUnit(unitName="persistenceUnit2")
+@Entity
 public class User {
-
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	
 	@NotNull
 	@Size(min=3, max=16, message="{error.username.size}")
 	private String username;

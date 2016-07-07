@@ -6,13 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.PersistenceUnit;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.GenerationType;
 
 @PersistenceUnit(unitName="persistenceUnit2")
 @Entity
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	

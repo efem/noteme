@@ -11,6 +11,8 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/notedb" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.import_files" value="/WEB-INF/resources/sql/initial_data.sql" />
+			<!-- <property name="hibernate.hbm2ddl.import_files" value="classpath:sql/initial_data.sql" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

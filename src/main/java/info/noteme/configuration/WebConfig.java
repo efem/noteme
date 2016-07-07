@@ -138,14 +138,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return adapter;
 	}
 
-	/*
-	 * @Bean public RequestMappingHandlerMapping handlerMapping() {
-	 * RequestMappingHandlerMapping handler = new
-	 * RequestMappingHandlerMapping();
-	 * handler.setInterceptors(this.localeChangeInterceptor()); return handler;
-	 * }
-	 */
-
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

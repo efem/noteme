@@ -7,6 +7,9 @@ import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -48,20 +51,39 @@ public class DataSourceConfig {
 		return adapter;
 	}
 	
-	@PostConstruct
+	/*@Bean
+	//@PostConstruct
+	//@DependsOn({"freemarkerViewResolver", "entityManagerFactory", "jpaVendorAdapter"})
 	public String aa(){
 		Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");
 		flyway.setInitOnMigrate(true);
 		flyway.clean();
+		//flyway.migrate();
 		try {
 			flyway.migrate();
 		}
 		catch (Exception e) {
 			e.toString();
 		}
-		System.out.println("FLAAAAAAJ");
+		System.out.println("xdf");
 		return "aa";
-	}
+	}*/
+		
+	@EventListener
+    public void handleContextRefresh(ContextRefreshedEvent event) {
+        System.out.println("AXXX");
+        Flyway flyway = new Flyway();
+		flyway.setDataSource(this.dataSource());
+		flyway.setLocations("sql");
+		flyway.setInitOnMigrate(true);
+		try {
+			//flyway.clean();
+			flyway.migrate();
+		}
+		catch (Exception e) {
+			e.toString();
+		};
+    }
 }

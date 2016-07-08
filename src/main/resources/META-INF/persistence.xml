@@ -6,13 +6,11 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.user" value="noteme" />
-			<property name="javax.persistence.jdbc.password" value="noteme" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.2.2:3306/notedb" />
+			<property name="javax.persistence.jdbc.user" value="a" />
+			<property name="javax.persistence.jdbc.password" value="1qaz" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydatabase" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.hbm2ddl.import_files" value="/WEB-INF/resources/sql/initial_data.sql" />
-			<!-- <property name="hibernate.hbm2ddl.import_files" value="classpath:sql/initial_data.sql" /> -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

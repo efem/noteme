@@ -16,115 +16,159 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
+
+		<!-- servlet versions -->
+		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
+
+		<!-- spring versions -->
+		<spring-core-verion>4.3.0.RELEASE</spring-core-verion>
+		<spring-web-version>4.3.0.RELEASE</spring-web-version>
+		<spring-context-version>4.3.0.RELEASE</spring-context-version>
+		<spring-context-support-version>4.3.0.RELEASE</spring-context-support-version>
+		<spring-webmvc-version>4.3.0.RELEASE</spring-webmvc-version>
+
+		<!-- data-access versions -->
+		<hibernate-core-version>5.2.1.Final</hibernate-core-version>
+		<mysql-connector-java-version>5.1.39</mysql-connector-java-version>
+		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
+		<spring-data-jpa-version>1.10.2.RELEASE</spring-data-jpa-version>
+
+		<!-- validation versions -->
+		<validation-api-version>1.1.0.Final</validation-api-version>
+		<hibernate-validator-version>5.2.4.Final</hibernate-validator-version>
+
+		<!-- view versions -->
+		<freemarker-version>2.3.23</freemarker-version>
+
+		<!-- logging versions -->
+		<slf4j-api-version>1.7.21</slf4j-api-version>
+		<logback-classic-version>1.1.7</logback-classic-version>
+		<logback-core-version>1.1.7</logback-core-version>
+
+		<!-- additional versions -->
+		<system-rules-version>1.16.0</system-rules-version>
+		<commons-lang-version>2.6</commons-lang-version>
+
+		<!-- test versions -->
+		<spring-test-version>4.3.0.RELEASE</spring-test-version>
 	</properties>
 
 	<dependencies>
+		<!-- servlet dependencies -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet-api-version}</version>
+		</dependency>
+
+		<!-- spring dependecies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>${spring-core-verion}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>${spring-web-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>${spring-context-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>${spring-context-support-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>${spring-webmvc-version}</version>
+		</dependency>
+
+		<!-- data-access versions -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-core-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${commons-dbcp2-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.10.2.RELEASE</version>
+			<version>${spring-data-jpa-version}</version>
 		</dependency>
+
+		<!-- validation dependencies -->
 		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.23</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api-version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator-version}</version>
 		</dependency>
+
+		<!-- view dependencies -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker-version}</version>
+		</dependency>
+
+		<!-- logging dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
+			<version>${slf4j-api-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.1.7</version>
+			<version>${logback-classic-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>1.1.7</version>
+			<version>${logback-core-version}</version>
 		</dependency>
 
+		<!-- additional dependencies -->
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
-			<version>1.16.0</version>
+			<version>${system-rules-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<version>${commons-lang-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<!-- test dependencies -->
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.1.0.Final</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-test-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.1.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.39</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-
-
 	</dependencies>
 	<build>
 		<plugins>

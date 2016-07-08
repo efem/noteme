@@ -1,6 +1,9 @@
 package info.noteme.configuration;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,9 +42,26 @@ public class DataSourceConfig {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 
 		adapter.setDatabase(Database.MYSQL);
-		adapter.setShowSql(true);
+		adapter.setShowSql(false);
 		adapter.setGenerateDdl(false);
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		return adapter;
+	}
+	
+	@PostConstruct
+	public String aa(){
+		Flyway flyway = new Flyway();
+		flyway.setDataSource(this.dataSource());
+		flyway.setLocations("sql");
+		flyway.setInitOnMigrate(true);
+		flyway.clean();
+		try {
+			flyway.migrate();
+		}
+		catch (Exception e) {
+			e.toString();
+		}
+		System.out.println("FLAAAAAAJ");
+		return "aa";
 	}
 }

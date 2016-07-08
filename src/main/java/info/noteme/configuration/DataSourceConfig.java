@@ -50,36 +50,16 @@ public class DataSourceConfig {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		return adapter;
 	}
-	
-	/*@Bean
-	//@PostConstruct
-	//@DependsOn({"freemarkerViewResolver", "entityManagerFactory", "jpaVendorAdapter"})
-	public String aa(){
-		Flyway flyway = new Flyway();
-		flyway.setDataSource(this.dataSource());
-		flyway.setLocations("sql");
-		flyway.setInitOnMigrate(true);
-		flyway.clean();
-		//flyway.migrate();
-		try {
-			flyway.migrate();
-		}
-		catch (Exception e) {
-			e.toString();
-		}
-		System.out.println("xdf");
-		return "aa";
-	}*/
+
 		
 	@EventListener
-    public void handleContextRefresh(ContextRefreshedEvent event) {
+    public void runFlywayScripts(ContextRefreshedEvent event) {
         System.out.println("AXXX");
         Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");
 		flyway.setInitOnMigrate(true);
 		try {
-			//flyway.clean();
 			flyway.migrate();
 		}
 		catch (Exception e) {

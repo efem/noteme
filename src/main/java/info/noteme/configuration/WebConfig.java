@@ -37,14 +37,16 @@ import freemarker.template.utility.XmlEscape;
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "info.noteme" })
-@ContextConfiguration(classes = { WebConfig.class })
+@ContextConfiguration(classes = { WebConfig.class, DataSourceConfig.class })
 public class WebConfig extends WebMvcConfigurerAdapter {
-	/*
-	 * @Bean public ViewResolver viewResolver() { InternalResourceViewResolver
-	 * resolver = new InternalResourceViewResolver();
-	 * resolver.setPrefix("/WEB-INF/views/ftl/"); resolver.setSuffix(".ftl");
-	 * resolver.setExposeContextBeansAsAttributes(true); return resolver; }
-	 */
+
+	@Autowired
+	private XmlEscape fmXmlEscape;
+
+	@Bean
+	public XmlEscape fmXmlEscape() {
+		return new XmlEscape();
+	}
 
 	@Bean
 	public FreeMarkerViewResolver freemarkerViewResolver() {
@@ -54,14 +56,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setPrefix("");
 		resolver.setSuffix(".ftl");
 		return resolver;
-	}
-
-	@Autowired
-	private XmlEscape fmXmlEscape;
-
-	@Bean
-	public XmlEscape fmXmlEscape() {
-		return new XmlEscape();
 	}
 
 	@Bean
@@ -77,7 +71,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		config.setServletContext(applicationContext.getServletContext());
 		config.setFreemarkerVariables(variables);
 		config.setTemplateLoaderPath("/WEB-INF/views/ftl");
-		// config.setResourceLoader(applicationContext);
 		config.setFreemarkerSettings(property);
 
 		return config;
@@ -92,7 +85,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	SessionLocaleResolver localeResolver() {
+	public SessionLocaleResolver localeResolver() {
 		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
 		localeResolver.setDefaultLocale(Locale.ENGLISH);
 		return localeResolver;
@@ -104,38 +97,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		source.setBasename("i18n/msg");
 		source.setUseCodeAsDefaultMessage(true);
 		return source;
-	}
-
-	@Bean
-	public BasicDataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUsername("noteme");
-		dataSource.setPassword("noteme");
-		dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
-		dataSource.setValidationQuery("SELECT 1");
-		return dataSource;
-	}
-
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource,
-			JpaVendorAdapter jpaVendorAdapter) {
-		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-		emfb.setDataSource(dataSource);
-		emfb.setPersistenceUnitName("myDatabase");
-		emfb.setJpaVendorAdapter(jpaVendorAdapter);
-		return emfb;
-	}
-
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
-		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-
-		adapter.setDatabase(Database.MYSQL);
-		adapter.setShowSql(true);
-		adapter.setGenerateDdl(false);
-		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
-		return adapter;
 	}
 
 	@Override

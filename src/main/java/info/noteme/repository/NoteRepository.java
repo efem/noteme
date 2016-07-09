@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import info.noteme.interf.Note;
 
 
-public interface NoteRepository {
+public interface NoteRepository extends JpaRepository<Note, Long> {
+	List<Note> findAllNotes();
+	Note findOneNote(long id);
+	Note findByUsername(String username);
 	List<Note> findNotes(long max, int count);
-	Note findOne(long id);
 }

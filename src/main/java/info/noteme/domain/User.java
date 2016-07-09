@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import javax.persistence.GenerationType;
 
 @PersistenceUnit(unitName="persistenceUnit2")
-@Entity
+@Entity(name="USERS")
 public class User {
 	
 	@Id

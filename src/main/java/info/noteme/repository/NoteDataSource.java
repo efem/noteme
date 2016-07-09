@@ -27,7 +27,7 @@ public class NoteDataSource implements NoteRepository{
 	}
 
 	@Override
-	public Note findOne(long id) {
+	public Note findOneNote(long id) {
 		if (noteList.isEmpty())
 			fillNoteList();
 		return noteList.get(Integer.parseInt(String.valueOf(id)));

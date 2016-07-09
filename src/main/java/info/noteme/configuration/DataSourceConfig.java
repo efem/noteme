@@ -25,7 +25,7 @@ public class DataSourceConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("noteme");
 		dataSource.setPassword("noteme");
-		dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/notedb");
 		dataSource.setValidationQuery("SELECT 1");
 		return dataSource;
 	}
@@ -54,12 +54,13 @@ public class DataSourceConfig {
 		
 	@EventListener
     public void runFlywayScripts(ContextRefreshedEvent event) {
-        System.out.println("AXXX");
+        System.out.println("-----FLYWAY-----");
         Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");
-		flyway.setInitOnMigrate(true);
+		flyway.setBaselineOnMigrate(true);
 		try {
+			flyway.repair();
 			flyway.migrate();
 		}
 		catch (Exception e) {

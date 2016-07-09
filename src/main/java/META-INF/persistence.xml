@@ -8,9 +8,9 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="noteme" />
 			<property name="javax.persistence.jdbc.password" value="noteme" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.2.2:3306/notedb" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/notedb" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>

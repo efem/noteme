@@ -9,5 +9,5 @@ import info.noteme.domain.User;
 
 @Component
 public interface UserDao extends JpaRepository<User, Long>{
-
+	User getUserByUsername(String username);
 }

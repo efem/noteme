@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import info.noteme.dao.UserDao;
 import info.noteme.domain.User;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;
@@ -21,15 +24,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.getUserByUsername(username);
 	}
 
 
 	@Override
 	public User save(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.save(user);
 	}
 
 }

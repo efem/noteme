@@ -1,5 +1,7 @@
 package info.noteme.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +12,14 @@ import javax.persistence.GenerationType;
 
 @PersistenceUnit(unitName="persistenceUnit2")
 @Entity(name="USERS")
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1617955555423512691L;
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

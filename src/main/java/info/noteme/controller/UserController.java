@@ -45,6 +45,7 @@ public class UserController {
 		//System.out.println("GOT FROM FORM: " + user.getUsername());
 		LOG.info("GOT FROM FORM: " + user.getUsername());
 		userService.save(user);
+
 		//return "redirect:/user/" + user.getUsername();
 		return "redirect:/user/Piotr2";
 	}

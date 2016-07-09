@@ -16,13 +16,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JpaConfiguration {
 	@Autowired
-	BasicDataSource dataSource;
-
+	DataSourceConfig dsConfig;
+	
 	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+	public PlatformTransactionManager transactionManager(){
 	    JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-	    jpaTransactionManager.setDataSource(dataSource);
-	    jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
+		EntityManagerFactory emf = dsConfig.entityManagerFactory(dsConfig.dataSource(), dsConfig.jpaVendorAdapter()).getNativeEntityManagerFactory();
+				
+	    jpaTransactionManager.setDataSource(dsConfig.dataSource());
+	    jpaTransactionManager.setEntityManagerFactory(emf);
 	    return jpaTransactionManager;
 	}
 }

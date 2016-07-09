@@ -21,14 +21,14 @@
 		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
 
 		<!-- spring versions -->
-		<spring-core-verion>4.3.0.RELEASE</spring-core-verion>
-		<spring-web-version>4.3.0.RELEASE</spring-web-version>
-		<spring-context-version>4.3.0.RELEASE</spring-context-version>
-		<spring-context-support-version>4.3.0.RELEASE</spring-context-support-version>
-		<spring-webmvc-version>4.3.0.RELEASE</spring-webmvc-version>
+		<spring-core-verion>4.3.1.RELEASE</spring-core-verion>
+		<spring-web-version>4.3.1.RELEASE</spring-web-version>
+		<spring-context-version>4.3.1.RELEASE</spring-context-version>
+		<spring-context-support-version>4.3.1.RELEASE</spring-context-support-version>
+		<spring-webmvc-version>4.3.1.RELEASE</spring-webmvc-version>
 
 		<!-- data-access versions -->
-		<hibernate-core-version>5.2.1.Final</hibernate-core-version>
+		<hibernate-core-version>5.2.0.Final</hibernate-core-version>
 		<mysql-connector-java-version>5.1.39</mysql-connector-java-version>
 		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
 		<spring-data-jpa-version>1.10.2.RELEASE</spring-data-jpa-version>

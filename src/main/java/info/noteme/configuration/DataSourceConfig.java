@@ -1,16 +1,22 @@
 package info.noteme.configuration;
 
+import java.util.Properties;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.flywaydb.core.Flyway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
@@ -20,6 +26,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Configuration
 @ComponentScan({ "info.noteme" })
 public class DataSourceConfig {
+	static final Logger LOG = LoggerFactory.getLogger(DataSourceConfig.class);
 	
 	@Bean
 	public BasicDataSource dataSource() {
@@ -52,11 +59,22 @@ public class DataSourceConfig {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		return adapter;
 	}
-
+	
+	@Bean
+	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+	LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+	sfb.setDataSource(dataSource);
+	sfb.setPackagesToScan(new String[] { "info.noteme" });
+	Properties props = new Properties();
+	props.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
+	sfb.setHibernateProperties(props);
+	return sfb;
+	}
 		
 	@EventListener
     public void runFlywayScripts(ContextRefreshedEvent event) {
-        System.out.println("-----FLYWAY-----");
+
+        LOG.info("-----FLYWAY-----");
         Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");

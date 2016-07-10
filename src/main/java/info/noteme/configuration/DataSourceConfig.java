@@ -37,7 +37,6 @@ public class DataSourceConfig {
 	}
 
 	@Bean
-
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource,
 			JpaVendorAdapter jpaVendorAdapter) {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();

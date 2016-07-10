@@ -2,6 +2,7 @@ package info.noteme.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,10 +35,21 @@ public class User implements Serializable{
 	private String email;
 	
 	@NotNull
-	@Size(min=5, max=25, message="{error.password.size}")
+	@Size(min=5, max=60, message="{error.password.size}")
+	//@Column(length=60)
 	private String password;
 	
+	private boolean isDeleted;
 	
+	
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	public User() {
 		this(null, null, null);
 	}

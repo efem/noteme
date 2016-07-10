@@ -2,10 +2,6 @@ package info.noteme.configuration;
 
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
@@ -13,18 +9,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan({ "info.noteme" })
+@EnableJpaRepositories(basePackages="info.noteme")
+@EnableTransactionManagement
 public class DataSourceConfig {
 	static final Logger LOG = LoggerFactory.getLogger(DataSourceConfig.class);
 
@@ -40,14 +37,25 @@ public class DataSourceConfig {
 	}
 
 	@Bean
+
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource,
 			JpaVendorAdapter jpaVendorAdapter) {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-
+		emfb.setPackagesToScan(new String[] { "info.noteme" });
 		emfb.setDataSource(dataSource);
-		emfb.setPersistenceUnitName("noteMeDb");
+
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		emfb.setJpaVendorAdapter(vendorAdapter);
 		emfb.setJpaVendorAdapter(jpaVendorAdapter);
+		emfb.setJpaProperties(additionalProperties());
 		return emfb;
+	}
+
+	Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		return properties;
 	}
 
 	@Bean
@@ -61,7 +69,7 @@ public class DataSourceConfig {
 		return adapter;
 	}
 
-	@Bean
+/*	@Bean
 	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
 		sfb.setDataSource(dataSource);
@@ -70,7 +78,7 @@ public class DataSourceConfig {
 		props.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
 		sfb.setHibernateProperties(props);
 		return sfb;
-	}
+	}*/
 
 	@EventListener
 	public void runFlywayScripts(ContextRefreshedEvent event) {

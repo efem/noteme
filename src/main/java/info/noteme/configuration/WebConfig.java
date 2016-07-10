@@ -27,7 +27,7 @@ import freemarker.template.utility.XmlEscape;
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "info.noteme" })
-@ContextConfiguration(classes = { WebConfig.class, DataSourceConfig.class, JpaConfiguration.class })
+@ContextConfiguration(classes = { WebConfig.class, DataSourceConfig.class, JpaConfig.class })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired

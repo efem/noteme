@@ -2,6 +2,8 @@ package info.noteme.configuration;
 
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -37,6 +40,7 @@ public class DataSourceConfig {
 	}
 
 	@Bean
+	@DependsOn({"runFlywayScripts"})
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource,
 			JpaVendorAdapter jpaVendorAdapter) {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
@@ -52,7 +56,7 @@ public class DataSourceConfig {
 
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "validate");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		return properties;
 	}
@@ -79,9 +83,11 @@ public class DataSourceConfig {
 		return sfb;
 	}*/
 
-	@EventListener
-	public void runFlywayScripts(ContextRefreshedEvent event) {
-
+	//@EventListener
+	//@PostConstruct
+	@Bean
+	//public void runFlywayScripts(ContextRefreshedEvent event) {
+		public String runFlywayScripts() {
 		LOG.info("-----FLYWAY-----");
 		Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
@@ -94,5 +100,6 @@ public class DataSourceConfig {
 			e.toString();
 		}
 		;
+		return "OK";
 	}
 }

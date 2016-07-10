@@ -11,7 +11,7 @@ import info.noteme.dao.UserDao;
 import info.noteme.domain.User;
 
 @Service
-//@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;

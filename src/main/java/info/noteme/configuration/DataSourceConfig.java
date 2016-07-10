@@ -27,7 +27,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @ComponentScan({ "info.noteme" })
 public class DataSourceConfig {
 	static final Logger LOG = LoggerFactory.getLogger(DataSourceConfig.class);
-	
+
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -38,11 +38,12 @@ public class DataSourceConfig {
 		dataSource.setValidationQuery("SELECT 1");
 		return dataSource;
 	}
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource,
 			JpaVendorAdapter jpaVendorAdapter) {
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
+
 		emfb.setDataSource(dataSource);
 		emfb.setPersistenceUnitName("noteMeDb");
 		emfb.setJpaVendorAdapter(jpaVendorAdapter);
@@ -59,32 +60,32 @@ public class DataSourceConfig {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		return adapter;
 	}
-	
+
 	@Bean
 	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
-	LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
-	sfb.setDataSource(dataSource);
-	sfb.setPackagesToScan(new String[] { "info.noteme" });
-	Properties props = new Properties();
-	props.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
-	sfb.setHibernateProperties(props);
-	return sfb;
+		LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+		sfb.setDataSource(dataSource);
+		sfb.setPackagesToScan(new String[] { "info.noteme" });
+		Properties props = new Properties();
+		props.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
+		sfb.setHibernateProperties(props);
+		return sfb;
 	}
-		
-	@EventListener
-    public void runFlywayScripts(ContextRefreshedEvent event) {
 
-        LOG.info("-----FLYWAY-----");
-        Flyway flyway = new Flyway();
+	@EventListener
+	public void runFlywayScripts(ContextRefreshedEvent event) {
+
+		LOG.info("-----FLYWAY-----");
+		Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");
 		flyway.setBaselineOnMigrate(true);
 		try {
 			flyway.repair();
 			flyway.migrate();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.toString();
-		};
-    }
+		}
+		;
+	}
 }

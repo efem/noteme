@@ -46,8 +46,8 @@ public class UserController {
 		LOG.info("GOT FROM FORM: " + user.getUsername());
 		userService.save(user);
 
-		//return "redirect:/user/" + user.getUsername();
-		return "redirect:/user/Piotr2";
+		return "redirect:/user/" + user.getUsername();
+		//return "redirect:/user/Piotr2";
 	}
 	
 	@RequestMapping(value="/{username}", method=RequestMethod.GET)

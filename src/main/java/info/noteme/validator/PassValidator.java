@@ -19,10 +19,14 @@ public class PassValidator implements Validator{
 		User user = (User)target;
 		
 		String password = user.getPassword();
-		String passVerify = user.getPasswordVerify();
+		String passwordVerify = user.getPasswordVerify();
 		
-		if (!password.equals(passVerify)){
-			errors.rejectValue("password", "user.password.missMatch");
+		if (!password.equals(passwordVerify)){
+			errors.rejectValue("passwordVerify", "user.password.missMatch");
+		}
+		
+		if (password.length() < 5 || password.length() > 20) {
+			errors.rejectValue("password", "user.password.wronglength");
 		}
 		
 	}

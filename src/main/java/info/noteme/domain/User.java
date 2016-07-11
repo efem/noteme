@@ -36,12 +36,13 @@ public class User implements Serializable{
 	private String email;
 	
 	@NotNull
-	@Size(min=5, max=60, message="{error.password.size}")
 	private String password;
 	
-	//@Transient ignores field in persistance
 	@Transient
 	private String passwordVerify;
+
+	private boolean isDeleted;
+	
 	
 	public String getPasswordVerify() {
 		return passwordVerify;
@@ -51,8 +52,6 @@ public class User implements Serializable{
 		this.passwordVerify = passwordVerify;
 	}
 
-	private boolean isDeleted;
-	
 	
 	public boolean isDeleted() {
 		return isDeleted;

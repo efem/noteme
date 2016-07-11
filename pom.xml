@@ -27,7 +27,7 @@
 		<spring-context-support-version>4.3.1.RELEASE</spring-context-support-version>
 		<spring-webmvc-version>4.3.1.RELEASE</spring-webmvc-version>
 		<spring-orm-version>4.3.1.RELEASE</spring-orm-version>
-		<spring-security-core-version>4.1.1.RELEASE</spring-security-core-version>
+
 
 		<!-- data-access versions -->
 		<hibernate-core-version>5.2.0.Final</hibernate-core-version>
@@ -35,6 +35,12 @@
 		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
 		<spring-data-jpa-version>1.10.2.RELEASE</spring-data-jpa-version>
 		<flyway-core-version>3.2.1</flyway-core-version>
+
+		<!-- spring security -->
+		<spring-security-core-version>4.1.1.RELEASE</spring-security-core-version>
+		<spring-security-web-version>4.1.1.RELEASE</spring-security-web-version>
+		<spring-security-taglibs-version>4.1.1.RELEASE</spring-security-taglibs-version>
+		<spring-security-config-version>4.1.1.RELEASE</spring-security-config-version>
 
 		<!-- validation versions -->
 		<validation-api-version>1.1.0.Final</validation-api-version>
@@ -101,12 +107,6 @@
 			<version>${spring-orm-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring-security-core-version}</version>
-		</dependency>
-
 		<!-- data-access versions -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -134,7 +134,30 @@
 			<version>${flyway-core-version}</version>
 		</dependency>
 
+		<!-- spring security dependencies -->
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security-core-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security-web-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security-taglibs-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security-config-version}</version>
+		</dependency>
 		<!-- validation dependencies -->
 		<dependency>
 			<groupId>javax.validation</groupId>

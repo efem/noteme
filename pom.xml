@@ -27,6 +27,7 @@
 		<spring-context-support-version>4.3.1.RELEASE</spring-context-support-version>
 		<spring-webmvc-version>4.3.1.RELEASE</spring-webmvc-version>
 		<spring-orm-version>4.3.1.RELEASE</spring-orm-version>
+		<spring-security-core-version>4.1.1.RELEASE</spring-security-core-version>
 
 		<!-- data-access versions -->
 		<hibernate-core-version>5.2.0.Final</hibernate-core-version>
@@ -56,14 +57,7 @@
 	</properties>
 
 	<dependencies>
-	
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-core</artifactId>
-    <version>4.1.1.RELEASE</version>
-</dependency>
 
-	
 		<!-- servlet dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -105,6 +99,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-orm-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security-core-version}</version>
 		</dependency>
 
 		<!-- data-access versions -->

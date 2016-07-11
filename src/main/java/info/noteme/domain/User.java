@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.GenerationType;
@@ -36,9 +37,20 @@ public class User implements Serializable{
 	
 	@NotNull
 	@Size(min=5, max=60, message="{error.password.size}")
-	//@Column(length=60)
 	private String password;
 	
+	//@Transient ignores field in persistance
+	@Transient
+	private String passwordVerify;
+	
+	public String getPasswordVerify() {
+		return passwordVerify;
+	}
+
+	public void setPasswordVerify(String passwordVerify) {
+		this.passwordVerify = passwordVerify;
+	}
+
 	private boolean isDeleted;
 	
 	

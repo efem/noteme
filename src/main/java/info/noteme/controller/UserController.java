@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import info.noteme.domain.User;
 import info.noteme.service.UserService;
+import info.noteme.validator.PassValidator;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
 	static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+	
+	@Autowired
+	private PassValidator passValidator;
 	
 	@Autowired
 	private UserService userService;
@@ -37,12 +40,13 @@ public class UserController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String processRegistration(@Valid User user, Errors errors) {
+		passValidator.validate(user, errors);
 		if (errors.hasErrors()) {
 			System.out.println("BLEDY WALIDACJI");
 			System.out.println(errors.toString());
 			return "registerForm";
 		}
-		//System.out.println("GOT FROM FORM: " + user.getUsername());
+
 		LOG.info("GOT FROM FORM: " + user.getUsername());
 		userService.save(user);
 

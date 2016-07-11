@@ -2,8 +2,6 @@ package info.noteme.configuration;
 
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
@@ -12,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -34,7 +30,7 @@ public class DataSourceConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("noteme");
 		dataSource.setPassword("noteme");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/notedb");
+		dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
 		dataSource.setValidationQuery("SELECT 1");
 		return dataSource;
 	}

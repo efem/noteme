@@ -7,12 +7,12 @@
 	<@spring.showErrors "<br>"/>
 	First name:<br>
 		<@init.spring.formInput "user.username" /><@init.spring.showErrors "<br />", "error" /><br>
-  	Last name:<br>
+  	Email:<br>
   		<@init.spring.formInput "user.email" /><@init.spring.showErrors "<br>"/><br>
   	Password<br>
 		<@init.spring.formInput "user.password" /><@init.spring.showErrors "<br>"/><br>
   	Repeat password:<br>
-  		<input type="password" name="password_repeat" />
+  		<@init.spring.formInput "user.passwordverify" /><@init.spring.showErrors "<br>"/><br>
   		<input type="submit" value="Register">
 </form> 
 </@init.pageBody>

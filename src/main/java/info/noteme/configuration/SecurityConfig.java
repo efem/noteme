@@ -22,21 +22,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-	  http.authorizeRequests()
+/*	  http.authorizeRequests()
 		.antMatchers("/user/register/**").access("hasRole('ROLE_USER')")
 		.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
 		.and().formLogin();
 	  
 	  http.csrf().disable();
 		
-	}
-/*	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-				.anyRequest().authenticated()
-				.and()
-			.formLogin().and()
-			.httpBasic();
-}*/
+	}*/
+	
+	  http.authorizeRequests()
+			.antMatchers("/user/register/**").access("hasRole('ROLE_USER')")
+			.and()
+			    .formLogin().loginPage("/user/login").failureUrl("/user/login?error")
+			    .usernameParameter("email").passwordParameter("password")		
+			.and()
+			    .logout().logoutSuccessUrl("/user/login?logout");
+			/*.and()
+			    .csrf(); 	*/	
+	  http.csrf().disable();
+		}
 }

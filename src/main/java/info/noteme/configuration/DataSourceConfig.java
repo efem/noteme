@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -30,7 +31,7 @@ public class DataSourceConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("noteme");
 		dataSource.setPassword("noteme");
-		dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/notedb");
 		dataSource.setValidationQuery("SELECT 1");
 		return dataSource;
 	}
@@ -98,4 +99,5 @@ public class DataSourceConfig {
 		;
 		return "OK";
 	}
+	
 }

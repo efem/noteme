@@ -43,7 +43,7 @@ public class User implements Serializable{
 	@Transient
 	private String passwordVerify;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="users")
 	private List<Role> roles;
 
 	private boolean isDeleted;

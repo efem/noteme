@@ -1,5 +1,5 @@
 body {
-	background-color: #DAE5CA;
+	background-color: #4E9190;
 	font-family: "Tahoma";
 	margin-left: auto;
 	margin-right: auto;
@@ -18,13 +18,4 @@ span.error {
 }
 .buttonHolder{
     text-align: center;
-}
-
-table {
-	margin-left: auto;
-	margin-right: auto;
-}
-table tr#first {
-	border-bottom: 1px solid #008999;
-	background: #23B9B5
 }

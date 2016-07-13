@@ -68,6 +68,11 @@ public class UserController {
 		return "registerForm";
 	}
 	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public String showTest() {
+		return "test";
+	}
+	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String processRegistration(@Valid User user, Errors errors) {
 		passValidator.validate(user, errors);

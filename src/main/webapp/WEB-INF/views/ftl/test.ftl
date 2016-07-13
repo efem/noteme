@@ -1,5 +1,5 @@
 <#import "init.ftl" as init />
-<@init.pageInit title="TEST" />
+<@init.pageInit title="ALL test" />
 <@init.pageBody>
-	test
+test
 </@init.pageBody>

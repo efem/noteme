@@ -1,11 +1,13 @@
 package info.noteme.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -40,6 +42,9 @@ public class User implements Serializable{
 	
 	@Transient
 	private String passwordVerify;
+	
+	@ManyToMany
+	private List<Role> roles;
 
 	private boolean isDeleted;
 	

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import info.noteme.domain.User;
+import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
 import info.noteme.validator.PassValidator;
 
@@ -37,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@Autowired
 	private	ResourceBundleMessageSource messageSource;
@@ -65,6 +69,7 @@ public class UserController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String showRegsitrationForm(@ModelAttribute("user") User user) {
+		user.setRoles(roleService.findAll());
 		return "registerForm";
 	}
 	

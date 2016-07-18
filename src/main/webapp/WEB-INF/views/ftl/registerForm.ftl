@@ -13,6 +13,8 @@
 		<@init.spring.formInput "user.password" /><@init.spring.showErrors "<br>"/><br>
   	<@init.spring.message code="label.password.repeat" /><br>
   		<@init.spring.formInput "user.passwordVerify" /><@init.spring.showErrors "<br>"/><br>
+	<@init.spring.message code="label.role" /><br>
+		<@init.getRolemacro "roles" user.roles/>
   	<input type="submit" value="<@init.spring.message code="label.register" />" />
 </form> 
 </@init.pageBody>

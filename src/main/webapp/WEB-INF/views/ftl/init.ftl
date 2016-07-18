@@ -19,6 +19,15 @@
 </html>
 </#macro>
 
+<#-- MACRO for listing roles-->
+<#macro getRolemacro role values>
+	<select name="role_id">
+	<#list values as singleRole>
+		<option value="${singleRole.id!""}" <#if singleGenre == user.role>selected</#if>>${singleRole!""}</option>
+	</#list>
+	</select>
+</#macro>
+
 <#macro setTitle title>
 	<title>${title!""}</title>
 </#macro>

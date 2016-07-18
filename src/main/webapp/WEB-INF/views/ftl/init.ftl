@@ -20,10 +20,10 @@
 </#macro>
 
 <#-- MACRO for listing roles-->
-<#macro getRolemacro role values>
+<#macro getRolemacro roles values>
 	<select name="role_id">
 	<#list values as singleRole>
-		<option value="${singleRole.id!""}" <#if singleGenre == user.role>selected</#if>>${singleRole!""}</option>
+		<option value="${singleRole.id!""}">${singleRole!""}</option>
 	</#list>
 	</select>
 </#macro>

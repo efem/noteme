@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
+	DataSourceConfig dataSource;
+	
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	  auth.inMemoryAuthentication().withUser("ja").password("123").roles("USER");
 	  auth.inMemoryAuthentication().withUser("admin").password("1234").roles("ADMIN");
@@ -42,4 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			    .csrf(); 	*/	
 	  http.csrf().disable();
 		}
+	
+/*	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(dataSource.dataSource())
+		.usersByUsernameQuery(
+				"select username, password, isdeleted from users where username=?")
+		.authoritiesByUsernameQuery(
+				"select username, role from user_roles where username=?");
+	}*/
 }

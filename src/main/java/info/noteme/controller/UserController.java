@@ -104,6 +104,7 @@ public class UserController {
 	@RequestMapping(value="/{username}", method=RequestMethod.GET)
 	public String showUserProfile(@PathVariable String username, Model model) {
 		model.addAttribute("userProfile", userService.getUserByUsername(username));
+		model.addAttribute("userRoles", userService.getUserByUsername(username).getRoles());
 		return "profile";
 	}
 }

@@ -8,7 +8,7 @@
 		Email: ${userProfile.email!""} <br />
 		Pass: ${userProfile.password!""} <br />
 		Roles: 
-		<#list userProfile.roles as singleRole>
+		<#list userRoles as singleRole>
 			${singleRole.rolename!""} | 
 		</#list>
 	<#else>

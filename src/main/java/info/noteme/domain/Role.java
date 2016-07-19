@@ -3,6 +3,7 @@ package info.noteme.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class Role {
 	@NotEmpty
 	private String rolename;
 	
-	@ManyToMany(mappedBy="roles")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy="roles")
 	private List<User> users;
 
 	public Role() {

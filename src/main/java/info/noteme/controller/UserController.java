@@ -81,12 +81,13 @@ public class UserController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String processRegistration(@Valid User user, Errors errors) {
 		passValidator.validate(user, errors);
+		
 		if (errors.hasErrors()) {
-			System.out.println("BLEDY WALIDACJI");
-			System.out.println(errors.toString());
+			LOG.error("VALIDATION ERROS: " + errors.toString());
+			user.setRoles(roleService.findAll());
 			return "registerForm";
 		}
-
+		
 		LOG.info("GOT FROM FORM: " + user.getUsername());
 		userService.save(user);
 

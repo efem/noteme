@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Transient;
@@ -44,6 +46,11 @@ public class User implements Serializable{
 	private String passwordVerify;
 	
 	@ManyToMany(mappedBy="users")
+	@JoinTable(
+			name="users_roles",
+			joinColumns={@JoinColumn(name = "username")},
+			inverseJoinColumns={@JoinColumn(name = "rolename")}
+			)
 	private List<Role> roles;
 
 	public List<Role> getRoles() {

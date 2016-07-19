@@ -22,7 +22,7 @@
 <#-- MACRO for listing roles-->
 <#macro getRolemacro roles values>
 	<#list values as singleRole>
-		<input type="checkbox" name="roles" value="${singleRole.id!""}">${singleRole!""}<br >
+		<input type="checkbox" name="userRoles" value="${singleRole.id!""}">${singleRole!""}<br >
 	</#list>
 </#macro>
 

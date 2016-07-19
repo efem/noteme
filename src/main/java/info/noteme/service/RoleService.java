@@ -6,4 +6,6 @@ import info.noteme.domain.Role;
 
 public interface RoleService {
 	List<Role> findAll();
+	
+	Role getRoleById(Long id);
 }

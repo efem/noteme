@@ -1,7 +1,7 @@
 package info.noteme.controller;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+import info.noteme.domain.Role;
 import info.noteme.domain.User;
 import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
@@ -79,10 +79,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String processRegistration(@Valid User user, Errors errors) {
+	public String processRegistration(@Valid User user, Errors errors, @RequestParam("userRoles") String[] roles) {
 		passValidator.validate(user, errors);
 		
-		LOG.info("UROLE: " + user.getRoles());
+		List<Role> roleList = new ArrayList<>();
+
+		for (int i = 0; i< roles.length; i++) {
+			roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));
+		}
+		user.setRoles(roleList);
 		
 		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
@@ -94,7 +99,6 @@ public class UserController {
 		userService.save(user);
 
 		return "redirect:/user/" + user.getUsername();
-		//return "redirect:/user/Piotr2";
 	}
 	
 	@RequestMapping(value="/{username}", method=RequestMethod.GET)

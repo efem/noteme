@@ -6,7 +6,9 @@
 		USER PROFILE: <br />
 		Username: ${userProfile.username!""} <br />
 		Email: ${userProfile.email!""} <br />
-		Pass: ${userProfile.password!""}
+		Pass: ${userProfile.password!""} <br />
+		Roles: 
+		
 	<#else>
 		USER NOT FOUND
 	</#if>

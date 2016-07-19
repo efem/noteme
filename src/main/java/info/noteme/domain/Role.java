@@ -14,6 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="ROLES")
 public class Role {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -21,7 +22,7 @@ public class Role {
 	@NotEmpty
 	private String rolename;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="roles")
 	private List<User> users;
 
 	public Role() {

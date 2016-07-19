@@ -11,13 +11,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.GenerationType;
 
-@PersistenceUnit(unitName="persistenceUnit2")
-@Entity(name="USERS")
+@Entity
+@Table(name="USERS")
 public class User implements Serializable{
 	
 	/**
@@ -45,11 +46,11 @@ public class User implements Serializable{
 	@Transient
 	private String passwordVerify;
 	
-	@ManyToMany(mappedBy="users")
+	@ManyToMany
 	@JoinTable(
 			name="users_roles",
-			joinColumns={@JoinColumn(name = "username")},
-			inverseJoinColumns={@JoinColumn(name = "rolename")}
+			joinColumns={@JoinColumn(name = "userid")},
+			inverseJoinColumns={@JoinColumn(name = "roleid")}
 			)
 	private List<Role> roles;
 
@@ -84,11 +85,15 @@ public class User implements Serializable{
 	public User() {
 		this(null, null, null);
 	}
-	
 	public User(String username, String email, String password) {
+		this(username, email, password, null);
+	}
+	
+	public User(String username, String email, String password, List<Role> roles) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.roles=roles;
 	}
 
 	public String getUsername() {
@@ -114,6 +119,7 @@ public class User implements Serializable{
 	public String getPassword() {
 		return password;
 	}
+	
 
 	@Override
 	public String toString() {

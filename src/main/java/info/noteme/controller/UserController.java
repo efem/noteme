@@ -82,6 +82,8 @@ public class UserController {
 	public String processRegistration(@Valid User user, Errors errors) {
 		passValidator.validate(user, errors);
 		
+		LOG.info("UROLE: " + user.getRoles());
+		
 		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
 			user.setRoles(roleService.findAll());

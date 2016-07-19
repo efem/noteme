@@ -86,7 +86,7 @@ public class DataSourceConfig {
 	//public void runFlywayScripts(ContextRefreshedEvent event) {
 		public String runFlywayScripts() {
 		LOG.info("-----FLYWAY-----");
-		Flyway flyway = new Flyway();
+/*		Flyway flyway = new Flyway();
 		flyway.setDataSource(this.dataSource());
 		flyway.setLocations("sql");
 		flyway.setBaselineOnMigrate(true);
@@ -95,7 +95,7 @@ public class DataSourceConfig {
 			flyway.migrate();
 		} catch (Exception e) {
 			e.toString();
-		};
+		};*/
 		return "OK";
 	}
 	

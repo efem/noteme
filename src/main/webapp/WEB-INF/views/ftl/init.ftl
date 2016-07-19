@@ -21,11 +21,9 @@
 
 <#-- MACRO for listing roles-->
 <#macro getRolemacro roles values>
-	<select name="role_id">
 	<#list values as singleRole>
-		<option value="${singleRole.id!""}">${singleRole!""}</option>
+		<input type="checkbox" name="roles" value="${singleRole.id!""}">${singleRole!""}<br >
 	</#list>
-	</select>
 </#macro>
 
 <#macro setTitle title>

@@ -5,7 +5,7 @@
 <@init.pageBody>
 <form name="user" method="POST">
 	<@spring.showErrors "<br>"/>
-	<@init.spring.message code="label.nickname" /><br>
+	<@init.spring.message code="label.username" /><br>
 		<@init.spring.formInput "user.username" /><@init.spring.showErrors "<br />", "error" /><br>
   	<@init.spring.message code="label.email" /><br>
   		<@init.spring.formInput "user.email" /><@init.spring.showErrors "<br>"/><br>

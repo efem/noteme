@@ -16,11 +16,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="USERS")
-public class User implements Serializable{
+public class User implements Serializable {
 	
 	/**
 	 * 

@@ -98,10 +98,10 @@ public class UserController {
 		LOG.info("GOT FROM FORM: " + user.getUsername());
 		userService.save(user);
 
-		return "redirect:/user/" + user.getUsername();
+		return "redirect:/user/show/" + user.getUsername();
 	}
 	
-	@RequestMapping(value="/{username}", method=RequestMethod.GET)
+	@RequestMapping(value="/show/{username}", method=RequestMethod.GET)
 	public String showUserProfile(@PathVariable String username, Model model) {
 		model.addAttribute("userProfile", userService.getUserByUsername(username));
 		model.addAttribute("userRoles", userService.getUserByUsername(username).getRoles());

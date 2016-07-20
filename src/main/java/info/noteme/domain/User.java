@@ -63,7 +63,7 @@ public class User implements Serializable{
 		this.roles = roles;
 	}
 
-	private boolean isDeleted;
+	private boolean enabled;
 	
 	
 	public String getPasswordVerify() {
@@ -74,27 +74,28 @@ public class User implements Serializable{
 		this.passwordVerify = passwordVerify;
 	}
 
-	
-	public boolean isDeleted() {
-		return isDeleted;
+
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public User() {
 		this(null, null, null);
 	}
 	public User(String username, String email, String password) {
-		this(username, email, password, null);
+		this(username, email, password, null, true);
 	}
 	
-	public User(String username, String email, String password, List<Role> roles) {
+	public User(String username, String email, String password, List<Role> roles, boolean isenabled) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.roles=roles;
+		this.enabled=true;
 	}
 
 	public String getUsername() {

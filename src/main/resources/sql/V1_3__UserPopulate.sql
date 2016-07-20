@@ -1,3 +1,3 @@
 INSERT INTO users
-(username, email, password, isDeleted)
-VALUES ("John", "jrambo@gmail.com", "secret", 0);
+(username, email, password, enabled)
+VALUES ("john", "jrambo@gmail.com", "secret", 1);

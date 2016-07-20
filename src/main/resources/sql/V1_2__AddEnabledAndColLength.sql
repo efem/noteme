@@ -1,0 +1,3 @@
+ALTER TABLE users CHANGE COLUMN password password VARCHAR(60) NOT NULL ;
+
+ALTER TABLE users ADD COLUMN enabled BIT(1) NOT NULL DEFAULT 1 AFTER password;

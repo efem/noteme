@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import info.noteme.interf.Note;
+import info.noteme.domain.Note;
 
 @Controller
 @RequestMapping("/notes")

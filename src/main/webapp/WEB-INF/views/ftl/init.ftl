@@ -33,3 +33,7 @@
 <#macro importCss>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/style.css'/>"/>
 </#macro>
+
+<#macro linksMacro>
+	<a href="/">MAIN PAGE</a> | <a href="user/login">LOGIN</a> | <a href="/register">REGISTER</a>
+</#macro>

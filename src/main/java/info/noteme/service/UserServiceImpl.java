@@ -44,12 +44,6 @@ public class UserServiceImpl implements UserService {
 		LOG.info("Saving user with password: " + userToSave.getPassword());
 		return userDao.save(userToSave);
 	}
-
-
-	@Override
-	public User saveAndFlush(User user) {
-		return userDao.saveAndFlush(user);
-	}
 	
 
 }

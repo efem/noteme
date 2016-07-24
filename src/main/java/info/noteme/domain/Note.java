@@ -1,5 +1,7 @@
 package info.noteme.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "NOTE")
@@ -19,9 +25,23 @@ public class Note {
 
 	@NotNull
 	private String content;
-
+	
 	@NotNull
 	private String trynick;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dateadded;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date datemodified;
+	
+	@NotNull
+	private boolean mailtosend;
+	
+	@NotNull
+	private boolean wasmailsend;
 
 	@NotNull
 	private boolean nickfound;
@@ -35,9 +55,20 @@ public class Note {
 	}
 
 	public Note(String content, String tryNick) {
+		this(content, tryNick, null, null, false, false, false);
+	}
+
+	
+	public Note(String content, String trynick, Date dateadded, Date datemodified, boolean mailtosend, boolean wasmailsend,
+			boolean nickfound) {
 		super();
 		this.content = content;
-		this.trynick = tryNick;
+		this.dateadded = dateadded;
+		this.datemodified = datemodified;
+		this.mailtosend = mailtosend;
+		this.wasmailsend = wasmailsend;
+		this.trynick = trynick;
+		this.nickfound = nickfound;
 	}
 
 	public long getId() {
@@ -78,6 +109,39 @@ public class Note {
 
 	public void setNickfound(boolean nickfound) {
 		this.nickfound = nickfound;
+	}
+	
+
+	public Date getDateadded() {
+		return dateadded;
+	}
+
+	public void setDateadded(Date dateadded) {
+		this.dateadded = dateadded;
+	}
+
+	public Date getDatemodified() {
+		return datemodified;
+	}
+
+	public void setDatemodified(Date datemodified) {
+		this.datemodified = datemodified;
+	}
+
+	public boolean isMailtosend() {
+		return mailtosend;
+	}
+
+	public void setMailtosend(boolean mailtosend) {
+		this.mailtosend = mailtosend;
+	}
+
+	public boolean isWasmailsend() {
+		return wasmailsend;
+	}
+
+	public void setWasmailsend(boolean wasmailsend) {
+		this.wasmailsend = wasmailsend;
 	}
 
 	@Override

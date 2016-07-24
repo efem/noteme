@@ -29,12 +29,12 @@ public class Note {
 	@NotNull
 	private String trynick;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateadded;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date datemodified;
 	
 	@NotNull
@@ -146,7 +146,10 @@ public class Note {
 
 	@Override
 	public String toString() {
-		return "Note [content=" + content + ", tryNick=" + trynick + "]";
+		return "Note [content=" + content + ", trynick=" + trynick + ", dateadded=" + dateadded + ", datemodified="
+				+ datemodified + ", mailtosend=" + mailtosend + ", wasmailsend=" + wasmailsend + ", nickfound="
+				+ nickfound + ", user=" + user + "]";
 	}
+
 
 }

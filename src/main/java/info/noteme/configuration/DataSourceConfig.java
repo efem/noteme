@@ -92,6 +92,7 @@ public class DataSourceConfig {
 		flyway.setBaselineOnMigrate(true);
 		try {
 			flyway.repair();
+			//flyway.clean();
 			flyway.migrate();
 		} catch (Exception e) {
 			e.toString();

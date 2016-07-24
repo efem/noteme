@@ -1,8 +1,12 @@
 package info.noteme.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +18,8 @@ import info.noteme.domain.Note;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class NoteServiceImpl implements NoteService {
+	
+	static final Logger LOG = LoggerFactory.getLogger(NoteServiceImpl.class);
 	
 	@Autowired
 	NoteDao noteDao;
@@ -47,12 +53,15 @@ public class NoteServiceImpl implements NoteService {
 			noteToSave.setTrynick("dummy");
 			noteToSave.setNickfound(false);
 		}
+	  
 		noteToSave.setDateadded(new Date());
 		noteToSave.setDatemodified(new Date());
 		noteToSave.setMailtosend(false);
 		noteToSave.setWasmailsend(false);
 		
-		return noteToSave;
+		LOG.info("NEW NOTE: " + noteToSave);
+		
+		return noteDao.save(noteToSave);
 	}
 
 }

@@ -53,6 +53,10 @@ public class Note {
 	public Note() {
 		this(null, null);
 	}
+	
+	public Note(String content) {
+		this(content,null);
+	}
 
 	public Note(String content, String tryNick) {
 		this(content, tryNick, null, null, false, false, false);

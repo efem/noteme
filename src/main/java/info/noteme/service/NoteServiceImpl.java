@@ -42,10 +42,11 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public Note save(Note note) {
 		Note noteToSave = note;
-
+		LOG.info("Saving note");
 		String arr[] = note.getContent().split(" ", 2);
 		String nick = arr[0]; 
 		if (nick.length() > 0 && nick.length() <= 20) {
+			LOG.info("Trynick from Note: " + nick);
 			noteToSave.setTrynick(nick);
 			noteToSave.setNickfound(true);
 			

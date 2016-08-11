@@ -1,5 +1,5 @@
 <#import "init.ftl" as init />
-<@init.spring.bind "note"/>
+<@init.spring.bind "user"/>
 <@init.spring.showErrors '*', 'errors' />
 <@init.pageInit title="ADD NEW USER" />
 <@init.pageBody>

@@ -56,9 +56,13 @@ public class NoteController {
 			LOG.error("VALIDATION ERRORS: " + errors.toString());
 			return "noteForm";
 		}
+		try {
+			LOG.info("PRINCIPAL: " + principal.getName());
+		    note.setUser(userService.getUserByUsername(principal.getName()));			
+		} catch (NullPointerException npe) {
+			LOG.info("PRICIPAL: not logged in");
+		}
 		
-		LOG.info("PRINC: " + principal.getName());
-	    note.setUser(userService.getUserByUsername(principal.getName()));
 		noteService.save(note);
 		return "redirect:/note/show/" + note.getId();
 	}

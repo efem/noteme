@@ -2,6 +2,9 @@ package info.noteme.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import info.noteme.dao.NoteDao;
+import info.noteme.dao.UserDao;
 import info.noteme.domain.Note;
 
 @Service
@@ -23,6 +27,9 @@ public class NoteServiceImpl implements NoteService {
 	
 	@Autowired
 	NoteDao noteDao;
+	
+	@Autowired
+	UserDao userDao;
 
 	@Override
 	public List<Note> findAll() {
@@ -43,22 +50,34 @@ public class NoteServiceImpl implements NoteService {
 	public Note save(Note note) {
 		Note noteToSave = note;
 		LOG.info("Saving note");
-		String arr[] = note.getContent().split(" ", 2);
-		String nick = arr[0]; 
-		if (nick.length() > 0 && nick.length() <= 20) {
-			LOG.info("Trynick from Note: " + nick);
-			noteToSave.setTrynick(nick);
-			noteToSave.setNickfound(true);
-			
-		} else {
-			noteToSave.setTrynick("dummy");
-			noteToSave.setNickfound(false);
-		}
-	  
-		noteToSave.setDateadded(new Date());
-		noteToSave.setDatemodified(new Date());
+		
+		noteToSave.setDateadded(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
+		noteToSave.setDatemodified(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 		noteToSave.setMailtosend(false);
 		noteToSave.setWasmailsend(false);
+		
+		if (note.getUser()==null || note.getUser().equals("")) {
+			String arr[] = note.getContent().split(" ", 2);
+			String nick = arr[0]; 
+			if (nick.length() > 0 && nick.length() <= 20 && arr.length > 1) {
+				LOG.info("Trynick from Note: " + nick);
+				noteToSave.setTrynick(nick);
+				if (userDao.getUserByUsername(nick)!=null){
+					noteToSave.setTrynick(nick);
+					noteToSave.setNickfound(true);
+				} else {
+					noteToSave.setTrynick("-not found-");
+					noteToSave.setNickfound(false);
+				}		
+			} else {
+				noteToSave.setTrynick("-not applicable-");
+				noteToSave.setNickfound(false);
+			}
+		} else {
+			noteToSave.setTrynick("");
+			noteToSave.setNickfound(false);
+			noteToSave.setMailtosend(true);
+		}	
 		
 		LOG.info("NEW NOTE: " + noteToSave);
 		

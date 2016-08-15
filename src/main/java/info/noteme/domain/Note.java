@@ -1,5 +1,6 @@
 package info.noteme.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -27,15 +28,13 @@ public class Note {
 	private String content;
 	
 	@NotNull
-	private String trynick;
+	private String trynick = "";
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dateadded;
+	//@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime dateadded;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date datemodified;
+	//@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime datemodified;
 	
 	@NotNull
 	private boolean mailtosend;
@@ -63,7 +62,7 @@ public class Note {
 	}
 
 	
-	public Note(String content, String trynick, Date dateadded, Date datemodified, boolean mailtosend, boolean wasmailsend,
+	public Note(String content, String trynick, LocalDateTime dateadded, LocalDateTime datemodified, boolean mailtosend, boolean wasmailsend,
 			boolean nickfound) {
 		super();
 		this.content = content;
@@ -114,21 +113,20 @@ public class Note {
 	public void setNickfound(boolean nickfound) {
 		this.nickfound = nickfound;
 	}
-	
 
-	public Date getDateadded() {
+	public LocalDateTime getDateadded() {
 		return dateadded;
 	}
 
-	public void setDateadded(Date dateadded) {
+	public void setDateadded(LocalDateTime dateadded) {
 		this.dateadded = dateadded;
 	}
 
-	public Date getDatemodified() {
+	public LocalDateTime getDatemodified() {
 		return datemodified;
 	}
 
-	public void setDatemodified(Date datemodified) {
+	public void setDatemodified(LocalDateTime datemodified) {
 		this.datemodified = datemodified;
 	}
 

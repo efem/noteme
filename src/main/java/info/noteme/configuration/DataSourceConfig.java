@@ -31,7 +31,8 @@ public class DataSourceConfig {
 		dataSource.setUsername("noteme");
 		dataSource.setPassword("noteme");
 		//dataSource.setUrl("jdbc:mysql://vps301225.ovh.net:3306/notedb");
-		dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
+		//dataSource.setUrl("jdbc:mysql://10.0.2.2:3306/notedb");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/notedb");
 		dataSource.setValidationQuery("SELECT 1");
 		return dataSource;
 	}

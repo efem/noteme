@@ -1,4 +1,5 @@
 <#import "spring.ftl" as spring>
+<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#-- MACRO for initializing html page structure -->
 <#macro pageInit title>

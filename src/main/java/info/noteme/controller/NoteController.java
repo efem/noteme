@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,7 +40,10 @@ public class NoteController {
 	NoteValidator noteValidator;
 
 	@RequestMapping(value="/show/{noteid}", method=RequestMethod.GET)
-	public String showSingleNote(@ModelAttribute("note") Note note) {
+	public String showSingleNote(@PathVariable int noteid, Model model) {
+		Long noteId = ((Integer) noteid).longValue();
+		LOG.info("NOTEID: " + noteId + " CLASS: " + noteId.getClass().getName());
+		model.addAttribute("singleNote", noteService.getNoteById(noteId));
 		return "note";
 	}
 	

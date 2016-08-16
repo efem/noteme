@@ -1,6 +1,7 @@
 package info.noteme.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -50,13 +51,9 @@ public class User implements Serializable {
 	@Transient
 	private String passwordVerify;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date regDate;
+	private LocalDateTime regDate;
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date loginDate;
+	private LocalDateTime loginDate;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = { @JoinColumn(name = "userid") }, inverseJoinColumns = {
@@ -78,15 +75,16 @@ public class User implements Serializable {
 	}
 
 	public User(String username, String email, String password) {
-		this(username, email, password, null, true);
+		this(username, email, password, null, true, null);
 	}
 
-	public User(String username, String email, String password, List<Role> roles, boolean isenabled) {
+	public User(String username, String email, String password, List<Role> roles, boolean isenabled, LocalDateTime regDate) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
 		this.enabled = true;
+		this.regDate = regDate;
 	}
 
 	public Long getId() {
@@ -141,19 +139,19 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Date getRegDate() {
+	public LocalDateTime getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(Date regDate) {
+	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
 
-	public Date getLoginDate() {
+	public LocalDateTime getLoginDate() {
 		return loginDate;
 	}
 
-	public void setLoginDate(Date loginDate) {
+	public void setLoginDate(LocalDateTime loginDate) {
 		this.loginDate = loginDate;
 	}
 

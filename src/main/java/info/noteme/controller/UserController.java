@@ -1,5 +1,6 @@
 package info.noteme.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class UserController {
 			LOG.info("INVALID PASSWORD");
 			ObjectError errorObj = new ObjectError("general", messageSource.getMessage("user.login.credentials.bad", null, LocaleContextHolder.getLocale()));
 			result.addError(errorObj);
+		} else {
+			
 		}
 
 		if (logout != null) {
@@ -84,7 +87,6 @@ public class UserController {
 			roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));
 		}
 		user.setRoles(roleList);
-		
 		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
 			user.setRoles(roleService.findAll());

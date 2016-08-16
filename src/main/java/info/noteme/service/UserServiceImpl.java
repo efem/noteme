@@ -1,5 +1,8 @@
 package info.noteme.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -41,9 +44,19 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		User userToSave = user;
 		userToSave.setPassword(passwordEncoder.encode(user.getPassword()));
+		userToSave.setRegDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 		LOG.info("Saving user with password: " + userToSave.getPassword());
 		return userDao.save(userToSave);
 	}
+
+
+	@Override
+	public User updateLoginDate(User user) {
+		user.setLoginDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
+		return userDao.save(user);
+	}
+	
+	
 	
 
 }

@@ -5,15 +5,24 @@
 	<#if singleNote??>	
 		NOTE:<br />
 		${singleNote.content!""} <br />
+		Posted by: 
+		<#if singleNote.user??>
+	    <b>${singleNote.user.username!""}</b> <br />
+	    E-mail to: ${singleNote.user.email!""} was 
+	    	<#if singleNote.wasmailsend == true>
+	    		SEND
+	    	<#else>
+	    		NOT SEND
+	    	</#if>
+		<#else>
+    		<#if singleNote.nickfound == true>
+    		<b>${singleNote.trynick!""}</b>
+    		<#else>
+    		Anonymous
+    		</#if>
+		</#if>
+
 	<#else>
 		NOTE NOT FOUND
 	</#if>
-
-<@init.security.authorize access="isAuthenticated()">
-    logged in as <@init.security.authentication property="principal.username" /> 
-</@init.security.authorize>
-
-<@init.security.authorize access="! isAuthenticated()">
-    Not logged in
-</@init.security.authorize>
 </@init.pageBody>

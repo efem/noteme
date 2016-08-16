@@ -44,6 +44,7 @@ public class NoteController {
 		Long noteId = ((Integer) noteid).longValue();
 		LOG.info("NOTEID: " + noteId + " CLASS: " + noteId.getClass().getName());
 		model.addAttribute("singleNote", noteService.getNoteById(noteId));
+
 		return "note";
 	}
 	

@@ -91,7 +91,7 @@ public class UserController {
 			return "registerForm";
 		}
 		
-		LOG.info("GOT FROM FORM: " + user.getUsername());
+		LOG.info("USERNAME FROM FORM: " + user.getUsername());
 		userService.save(user);
 
 		return "redirect:/user/show/" + user.getUsername();

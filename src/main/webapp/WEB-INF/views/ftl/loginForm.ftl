@@ -8,7 +8,7 @@
   	<@init.spring.message code="label.username" />
   		<@init.spring.formInput "user.username" /><br>
   	<@init.spring.message code="label.password" />
-		<@init.spring.formInput "user.password" /><br>
+		<@init.spring.formPasswordInput "user.password" /><br>
   	<input type="submit" value="<@init.spring.message code="label.enter" />" />
 </form> 
 </@init.pageBody>

@@ -30,10 +30,8 @@ public class Note {
 	@NotNull
 	private String trynick = "";
 	
-	//@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime dateadded;
 	
-	//@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime datemodified;
 	
 	@NotNull

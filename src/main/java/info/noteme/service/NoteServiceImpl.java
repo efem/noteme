@@ -65,6 +65,7 @@ public class NoteServiceImpl implements NoteService {
 				if (userDao.getUserByUsername(nick)!=null){
 					noteToSave.setTrynick(userDao.getUserByUsername(nick).getUsername());
 					noteToSave.setNickfound(true);
+					noteToSave.setUser(userDao.getUserByUsername(nick));
 				} else {
 					noteToSave.setTrynick(nick);
 					noteToSave.setNickfound(false);

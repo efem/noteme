@@ -61,7 +61,7 @@ public class UserController {
 			ObjectError errorObj = new ObjectError("general", messageSource.getMessage("user.login.credentials.bad", null, LocaleContextHolder.getLocale()));
 			result.addError(errorObj);
 		} else {
-			
+			//userService.updateLoginDate(user);
 		}
 
 		if (logout != null) {

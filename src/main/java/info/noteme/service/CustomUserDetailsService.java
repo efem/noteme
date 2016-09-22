@@ -37,8 +37,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			LOG.info("User not found - ERROR");
 			throw new UsernameNotFoundException("User " + username + " has no authorities");
 		} else {
-			userService.updateLoginDate(user);
 			LOG.info("User logged - OK");
+			userService.updateLoginDate(user);
 		}
 		
 		return new UserDetailsHelper(user);		

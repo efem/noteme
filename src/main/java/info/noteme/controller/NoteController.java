@@ -1,7 +1,9 @@
 package info.noteme.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import info.noteme.domain.Note;
 import info.noteme.domain.User;
@@ -71,5 +74,16 @@ public class NoteController {
 		
 		noteService.save(note);
 		return "redirect:/note/show/" + note.getId();
+	}
+	
+	@RequestMapping(value="/showOne", produces = "application/json")
+	public @ResponseBody Note getSingleNoteJSON() {
+
+/*		List<String> objects = new ArrayList<String>();
+		objects.add("One");
+		objects.add("TWO");*/
+
+		return noteService.getNoteById(1L);
+
 	}
 }

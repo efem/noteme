@@ -24,6 +24,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "USERS")
 public class User implements Serializable {
@@ -60,6 +62,7 @@ public class User implements Serializable {
 			@JoinColumn(name = "roleid") })
 	private List<Role> roles;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Note> notes;
 

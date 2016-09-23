@@ -146,9 +146,7 @@ public class Note {
 
 	@Override
 	public String toString() {
-		return "Note [content=" + content + ", trynick=" + trynick + ", dateadded=" + dateadded + ", datemodified="
-				+ datemodified + ", mailtosend=" + mailtosend + ", wasmailsend=" + wasmailsend + ", nickfound="
-				+ nickfound + ", user=" + user + "]";
+		return "Note [content=" + content + "]";
 	}
 
 

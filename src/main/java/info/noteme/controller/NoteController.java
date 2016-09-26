@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import info.noteme.domain.Note;
 import info.noteme.domain.User;
@@ -30,19 +31,19 @@ import info.noteme.validator.NoteValidator;
 @Controller
 @RequestMapping("/note")
 public class NoteController {
-	
+
 	static final Logger LOG = LoggerFactory.getLogger(NoteController.class);
-	
+
 	@Autowired
 	NoteService noteService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	NoteValidator noteValidator;
 
-	@RequestMapping(value="/show/{noteid}", method=RequestMethod.GET)
+	@RequestMapping(value = "/show/{noteid}", method = RequestMethod.GET)
 	public String showSingleNote(@PathVariable int noteid, Model model) {
 		Long noteId = ((Integer) noteid).longValue();
 		LOG.info("NOTEID: " + noteId + " CLASS: " + noteId.getClass().getName());
@@ -50,40 +51,41 @@ public class NoteController {
 
 		return "note";
 	}
-	
-	@RequestMapping(value="/new", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String showNewNoteForm(@ModelAttribute("note") Note note, BindingResult result) {
-		
+
 		return "noteForm";
 	}
 
-	@RequestMapping(value="/new", method=RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public String saveNewNote(@Valid Note note, Errors errors, Principal principal) {
 		noteValidator.validate(note, errors);
-		
+
 		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERRORS: " + errors.toString());
 			return "noteForm";
 		}
 		try {
 			LOG.info("PRINCIPAL: " + principal.getName());
-		    note.setUser(userService.getUserByUsername(principal.getName()));			
+			note.setUser(userService.getUserByUsername(principal.getName()));
 		} catch (NullPointerException npe) {
 			LOG.info("PRICIPAL: not logged in");
 		}
-		
+
 		noteService.save(note);
 		return "redirect:/note/show/" + note.getId();
 	}
-	
-	@RequestMapping(value="/showOne", produces = "application/json")
-	public @ResponseBody Note getSingleNoteJSON() {
 
-/*		List<String> objects = new ArrayList<String>();
-		objects.add("One");
-		objects.add("TWO");*/
+	@RequestMapping(value = "/showOne", produces = "application/json")
+	public @ResponseBody String getSingleNoteJSON(@ModelAttribute("note") Note note) {
 
-		return noteService.getNoteById(1L);
+		/*ModelAndView mav = new ModelAndView();
+		mav.addObject(noteService.getNoteById(1L));*/
+		
+		note = noteService.getNoteById(1L);
+		
+		return "showOneNote";
 
 	}
 }

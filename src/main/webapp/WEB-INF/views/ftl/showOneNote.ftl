@@ -4,14 +4,13 @@
     <head>
         <title>Hello jQuery</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="<@spring.url '/resources/js/note-js.js'/>"/>
+        <script src="<@spring.url '/resources/js/note-js.js'/>"></script>
     </head>
 
     <body>
-        <div>
-            <p class="note.id">The ID is </p>
-            <p class="content">The content is </p>
-        </div>
+    http://codetutr.com/2013/04/09/spring-mvc-easy-rest-based-json-services-with-responsebody/
+    <input type="submit" id="randomPerson" value="Get Random Person" /><br/><br/>
+    <div id="personResponse"> </div>
     </body>
 </html>
 

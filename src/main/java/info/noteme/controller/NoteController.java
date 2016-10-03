@@ -78,12 +78,21 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "/showOne", produces = "application/json")
-	public @ResponseBody String getSingleNoteJSON(@ModelAttribute("note") Note note) {
+	public @ResponseBody Note getSingleNoteJSON(@ModelAttribute("note") Note note) {
 
 		/*ModelAndView mav = new ModelAndView();
 		mav.addObject(noteService.getNoteById(1L));*/
 		
 		note = noteService.getNoteById(1L);
+		
+		return note;
+
+	}
+	
+
+	@RequestMapping(value = "/showTest")
+	public String getSingleNoteJSON() {
+
 		
 		return "showOneNote";
 

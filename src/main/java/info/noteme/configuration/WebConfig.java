@@ -46,6 +46,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setCache(false);
 		resolver.setPrefix("");
 		resolver.setSuffix(".ftl");
+		resolver.setRequestContextAttribute("ctx");
 		return resolver;
 	}
 

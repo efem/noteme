@@ -1,7 +1,9 @@
 $(document).ready(function() {
-	$('#randomPerson').click(function() {
-        $.getJSON('${request.requestObject.contextPath} ', function(person) {
-          $('#personResponse').text(note.content + ', id ' + note.id);
-        });
-      });
+	(function() {
+		$.getJSON('showAll ', function(note) {
+			$.each(note, function(i, field) {
+				$('#personResponse').text(field.content + ', id ' + note.id);
+			});
+		});
+	});
 });

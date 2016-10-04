@@ -77,11 +77,9 @@ public class NoteController {
 		return "redirect:/note/show/" + note.getId();
 	}
 
-	@RequestMapping(value = "/showOne", produces = "application/json")
-	public @ResponseBody Note getSingleNoteJSON(@ModelAttribute("note") Note note) {
-
-		/*ModelAndView mav = new ModelAndView();
-		mav.addObject(noteService.getNoteById(1L));*/
+	@RequestMapping(value = "/showOne")
+	@ResponseBody
+	public Note getSingleNoteJSON(@ModelAttribute("note") Note note) {
 		
 		note = noteService.getNoteById(1L);
 		
@@ -89,6 +87,16 @@ public class NoteController {
 
 	}
 	
+	@RequestMapping(value = "/showAll")
+	@ResponseBody
+	public List<Note> getAllleNotesJSON(@ModelAttribute("note") Note note) {
+		
+		List<Note> allNotes = new ArrayList<Note>();
+		allNotes = noteService.findAll();
+		
+		return allNotes;
+
+	}
 
 	@RequestMapping(value = "/showTest")
 	public String getSingleNoteJSON() {

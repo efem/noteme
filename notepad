@@ -1,0 +1,18 @@
+$(document).ready(function() {
+	$('#randomPerson').click(function() {
+        $.getJSON('showOne ', function(note) {
+          $('#personResponse').text(note.content + ', id ' + note.id);
+        });
+      });
+});
+
+
+$(document).ready(function() {
+	(function() {
+		$.getJSON('showAll ', function(note) {
+			$.each(note, function(i, field) {
+				$('#personResponse').text(field.content + ', id ' + note.id);
+			});
+		});
+	});
+});

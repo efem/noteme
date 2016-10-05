@@ -42,8 +42,8 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Override
-	public Note getNoteByUsername(String username) {
-		return noteDao.getNoteByUser(username);
+	public List<Note> getNoteByUserUsername(String username) {
+		return noteDao.getNoteByUserUsername(username);
 	}
 
 	@Override

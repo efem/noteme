@@ -32,7 +32,6 @@ import info.noteme.service.UserService;
 import info.noteme.validator.NoteValidator;
 
 @Controller
-@MappedSuperclass
 @RequestMapping("/note")
 public class NoteController {
 

@@ -7,5 +7,5 @@
     <@init.spring.message "label.webapp" />
 <br />
 <a href="?lang=en">EN</a> || <a href="?lang=pl">PL</a>
-<a href="note/showTest">note test</a>
+<a href="admin/showAdmin">note REST</a>
 </@init.pageBody>

@@ -8,11 +8,14 @@
     </head>
 
     <body>
-
+		<form id="idForm">
+	      <label for="personId">Author: </label><input name="id" id="personId" />
+	      <input type="submit" value="Get Notes By Author" /> <br /><br/>
+	    </form>
 	    <input type="submit" id="showAllNotesBtn" value="All Notes" /><br/><br/>
 	    <input type="submit" id="showOneNoteBtn" value="One Note" /><br/><br/>
 	    <div id="dataLoad"> </div>
-
+		<div id="listLoad"> </div>
     </body>
 </html>
 

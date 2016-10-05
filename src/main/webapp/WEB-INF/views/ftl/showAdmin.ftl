@@ -9,10 +9,10 @@
 
     <body>
 
-	    http://codetutr.com/2013/04/09/spring-mvc-easy-rest-based-json-services-with-responsebody/
-	    <input type="submit" id="randomPerson" value="Get Random Person" /><br/><br/>
-	    <div id="personResponse"> </div>
-		CPATH: ${ctx.contextPath}
+	    <input type="submit" id="showAllNotesBtn" value="All Notes" /><br/><br/>
+	    <input type="submit" id="showOneNoteBtn" value="One Note" /><br/><br/>
+	    <div id="dataLoad"> </div>
+
     </body>
 </html>
 

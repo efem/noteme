@@ -16,3 +16,13 @@ $(document).ready(function() {
 		});
 	});
 });
+
+
+
+
+ $.getJSON('showAll ', function() {
+        	var list = ${list};
+        	$.each(list, function( index, value ) {
+    			alert( index + ": " + value );
+    		});
+        });

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.MappedSuperclass;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import info.noteme.domain.Note;
 import info.noteme.domain.User;
 import info.noteme.service.NoteService;
@@ -29,6 +32,7 @@ import info.noteme.service.UserService;
 import info.noteme.validator.NoteValidator;
 
 @Controller
+@MappedSuperclass
 @RequestMapping("/note")
 public class NoteController {
 
@@ -77,32 +81,5 @@ public class NoteController {
 		return "redirect:/note/show/" + note.getId();
 	}
 
-	@RequestMapping(value = "/showOne")
-	@ResponseBody
-	public Note getSingleNoteJSON(@ModelAttribute("note") Note note) {
-		
-		note = noteService.getNoteById(1L);
-		
-		return note;
-
-	}
 	
-	@RequestMapping(value = "/showAll")
-	@ResponseBody
-	public List<Note> getAllleNotesJSON(@ModelAttribute("note") Note note) {
-		
-		List<Note> allNotes = new ArrayList<Note>();
-		allNotes = noteService.findAll();
-		
-		return allNotes;
-
-	}
-
-	@RequestMapping(value = "/showTest")
-	public String getSingleNoteJSON() {
-
-		
-		return "showOneNote";
-
-	}
 }

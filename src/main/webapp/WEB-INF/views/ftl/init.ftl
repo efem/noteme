@@ -7,7 +7,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<@setTitle title=title />
-		<@importCss />
+        <@importBootstrap />
+        <@importJQuery />
+        <@importMyCss />
 		<#nested>
 	</head>
 </#macro>
@@ -31,9 +33,20 @@
 	<title>${title!""}</title>
 </#macro>
 
-<#macro importCss>
+<#macro importMyCss>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/style.css'/>"/>
 </#macro>
+
+<#macro importBootstrap>
+	<script src="<@spring.url '/resources/bootstrap/js/bootstrap.min.js'/>"></script>
+	<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/bootstrap/css/bootstrap.min.css'/>"/>
+	<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/bootstrap/css/bootstrap-theme.min.css'/>"/>
+</#macro>
+
+<#macro importJQuery>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</#macro>
+
 
 <#macro linksMacro>
 	<a href="/">MAIN PAGE</a> | <a href="user/login">LOGIN</a> | <a href="/register">REGISTER</a>

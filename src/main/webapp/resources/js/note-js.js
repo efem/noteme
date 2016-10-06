@@ -29,7 +29,7 @@ $(document).ready(function() {
         		var row = $('<tr></tr>').addClass('bar');
         		row.append('<td>' + user.username + '</td>');
         		row.append('<td>' + user.email + '</td>');
-        		row.append('<td>' + user.regDate + '</td>');
+        		row.append('<td>' + user.regDate.getDate() + '</td>');
         		//table.append('<tr></tr>').text(user.username);
         		//table.append('<tr></tr>').text(user.email);
         		//table.append('<tr></tr>').text(user.regDate);

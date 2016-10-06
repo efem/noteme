@@ -1,8 +1,9 @@
 body {
-	background-color: #d3d7cf;
+	background-color: #AABDC4;
 	font-family: "Tahoma";
 	margin-left: auto;
 	margin-right: auto;
+	padding: 200px auto auto 100px;
 }
 
 h2 {

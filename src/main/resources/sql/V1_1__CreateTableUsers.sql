@@ -3,7 +3,7 @@ CREATE TABLE users (
   username VARCHAR(16) NOT NULL,
   email VARCHAR(25) NOT NULL,
   password VARCHAR(20) NOT NULL,
-  loginDate date DEFAULT NULL,
-  regDate date DEFAULT NULL,
+  loginDate datetime DEFAULT NULL,
+  regDate datetime DEFAULT NULL,
   PRIMARY KEY (id)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8;

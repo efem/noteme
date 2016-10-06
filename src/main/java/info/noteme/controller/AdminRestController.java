@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import info.noteme.dao.UserDao;
 import info.noteme.domain.Note;
+import info.noteme.domain.User;
 import info.noteme.service.NoteService;
+import info.noteme.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,6 +26,9 @@ public class AdminRestController {
 
 	@Autowired
 	NoteService noteService;
+
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/showAdmin")
 	public String showAdminPageJSON() {
@@ -41,7 +47,6 @@ public class AdminRestController {
 		return note;
 
 	}
-	
 
 	@RequestMapping(value = "/showAll")
 	@ResponseBody
@@ -54,8 +59,7 @@ public class AdminRestController {
 		return allNotes;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showByAuthor/{username}")
 	@ResponseBody
 	public List<Note> getNoteByUserJSON(@PathVariable String username) {
@@ -64,6 +68,16 @@ public class AdminRestController {
 		List<Note> notesByUser = noteService.getNoteByUserUsername(username);
 		LOG.info("SHOW ONE NOTE BY USERNAME" + username);
 		return notesByUser;
+
+	}
+
+	@RequestMapping(value = "/showAuthorDetails/{username}")
+	@ResponseBody
+	public User getAuthorByUsernameJSON(@PathVariable String username) {
+		User user = userService.getUserByUsername(username);
+		LOG.info("USRNAME" + username);
+		LOG.info("USYR" + user);
+		return user;
 
 	}
 

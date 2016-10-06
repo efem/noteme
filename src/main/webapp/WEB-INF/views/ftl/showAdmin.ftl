@@ -8,10 +8,16 @@
     </head>
 
     <body>
-		<form id="idForm">
-	      <label for="personId">Author: </label><input name="id" id="personId" />
+		<form id="noteByUsernameForm">
+	      <label for="authorName">Author: </label><input name="authId" id="authorName" />
 	      <input type="submit" value="Get Notes By Author" /> <br /><br/>
 	    </form>
+	    
+	    <form id="userDetailsByUsernameForm">
+	      <label for="authorNameForDetails">Author: </label><input name="aName" id="authorNameForDetails" />
+	      <input type="submit" value="Get Author's Details" /> <br /><br/>
+	    </form>
+	    
 	    <input type="submit" id="showAllNotesBtn" value="All Notes" /><br/><br/>
 	    <input type="submit" id="showOneNoteBtn" value="One Note" /><br/><br/>
 	    <div id="dataLoad"> </div>

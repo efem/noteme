@@ -30,9 +30,14 @@ $(document).ready(function() {
         		var roles = '';
         		
         		$.each(user.roles, function( n, value ) {
-      			  roles = roles + "|" + value.rolename;
+        			if (roles=='') {
+        				roles = value.rolename;
+        			} else {
+        				roles = roles + "|" + value.rolename;
+        			}
+      			  
       			});
-        		roles = roles.substring(1);
+        		//roles = roles.substring(1);
         		
         		div.append('<p><span class="bold">Username: ' + user.username + '</span></p>');
         		div.append('<p><span class="bold">Email: ' + user.email);

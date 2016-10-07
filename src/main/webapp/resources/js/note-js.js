@@ -32,6 +32,7 @@ $(document).ready(function() {
         		$.each(user.roles, function( n, value ) {
       			  roles = roles + "|" + value.rolename;
       			});
+        		roles = roles.substring(1);
         		
         		div.append('<p><span class="bold">Username: ' + user.username + '</span></p>');
         		div.append('<p><span class="bold">Email: ' + user.email);
@@ -96,7 +97,7 @@ $(document).ready(function() {
 	}
 	
 	function checkValueForLessThanTen($number) {
-		var numberToReturn=$number;;
+		var numberToReturn=$number;
 		if ($number < 10) {
 			numberToReturn='0' + numberToReturn;
 		}

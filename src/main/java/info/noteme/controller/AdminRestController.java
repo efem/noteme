@@ -66,7 +66,7 @@ public class AdminRestController {
 
 		LOG.info("USNAME" + username);
 		List<Note> notesByUser = noteService.getNoteByUserUsername(username);
-		LOG.info("SHOW ONE NOTE BY USERNAME" + username);
+
 		return notesByUser;
 
 	}

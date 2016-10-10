@@ -2,14 +2,18 @@
 <#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#-- MACRO for initializing html page structure -->
-<#macro pageInit title>
+<#macro pageInit title adminJS=0>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<@setTitle title=title />
-        <@importBootstrap />
-        <@importJQuery />
+				<@importJQuery />
+				<#if adminJS == 1>
+					<@importAdminJS />
+				</#if>
+				<@importBootstrap />
         <@importMyCss />
+
 		<#nested>
 	</head>
 </#macro>
@@ -20,6 +24,22 @@
 		<#nested>
 	</body>
 </html>
+</#macro>
+
+<#macro renderNaviBar>
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/noteme/">Home</a></li>
+  <li role="presentation"><a href="user/register">Register</a></li>
+  <li role="presentation"><a href="user/login">Login</a></li>
+  <li role="presentation"><a href="admin/showAdmin">ADMIN</a></li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="?lang=en">EN</a></li>
+      <li><a href="?lang=pl">PL</a></li>
+    </ul>
+  </li>
+</ul>
 </#macro>
 
 <#-- MACRO for listing roles-->
@@ -35,6 +55,10 @@
 
 <#macro importMyCss>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/style.css'/>"/>
+</#macro>
+
+<#macro importAdminJS>
+	<script src="<@spring.url '/resources/js/note-js.js'/>"></script>
 </#macro>
 
 <#macro importBootstrap>

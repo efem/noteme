@@ -17,7 +17,6 @@
 		<#nested>
 	</head>
 </#macro>
-
 <#-- MACRO for creating html page structure -->
 <#macro pageBody>
 	<body>
@@ -29,7 +28,7 @@
 <#macro renderNaviBar>
 <ul class="nav nav-pills">
   <li role="presentation"><a href="/noteme/">Home</a></li>
-  <li role="presentation"><a href="user/register">Register</a></li>
+  <li role="presentation"><a href="user/register"><@init.spring.message "label.register" /></a></li>
   <li role="presentation"><a href="user/login">Login</a></li>
   <li role="presentation"><a href="admin/showAdmin">ADMIN</a></li>
   <li role="presentation" class="dropdown">

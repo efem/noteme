@@ -20,13 +20,9 @@ $(document).ready(function() {
 
 	$('#userDetailsByUsernameForm').submit(function(e) {
         var authorNameForDetails = $('#authorNameForDetails').val();
-        //alert(authorNameForDetails);
+        //alert('A');
+        $('#dataLoad').empty();
         $.getJSON('showAuthorDetails/' + authorNameForDetails, function(user) {
-        	$('#dataLoad').empty();
-        	if (jQuery.isEmptyObject(user)) {
-        		$('#dataLoad').append("NOT FOUND");
-        	} else {
-
         		var div = $('<div></div>').addClass('userDetailDiv');
         		var roles = '';
 
@@ -56,16 +52,16 @@ $(document).ready(function() {
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
         				checkValueForLessThanTen(user.loginDate.second));
 
-        		//div.append('<p><span class="bold">Roles: ' + roles);
 						div.append('<p><span class="bold">Roles: ' + printRoles(roles));
 
         		div.append('<p><span class="bold">Enabled: ' + user.enabled);
 
         		$('#dataLoad').append(div);
 
-
-        	}
-        });
+        }).error(function() { 
+        	$('#dataLoad').append("NOT FOUND");
+   		 	//alert('EMPTY');
+        	});
         e.preventDefault(); // prevent actual form submit
       });
 

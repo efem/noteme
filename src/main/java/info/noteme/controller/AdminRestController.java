@@ -75,8 +75,8 @@ public class AdminRestController {
 	@ResponseBody
 	public User getAuthorByUsernameJSON(@PathVariable String username) {
 		User user = userService.getUserByUsername(username);
-		LOG.info("USRNAME" + username);
-		LOG.info("USYR" + user);
+		LOG.info("USRNAME: " + username);
+		LOG.info("USYR: " + user);
 		return user;
 
 	}

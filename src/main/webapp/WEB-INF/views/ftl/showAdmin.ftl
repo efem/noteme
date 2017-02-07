@@ -9,12 +9,19 @@
       </div>
       <div class="panel-body">
         <form id="noteByUsernameForm">
-          <div style="float: left;"> <span for="authorName" class="label label-default">Author: </span></div>
-          <div style="float: left;"> <span><input type="text" name="authId" id="authorName" class="form-control" aria-label="..."></span></div>
-          <div style="float: left;"> <span><button type="submit" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Show
-          </button></span></div>
-      </form>
+         <div class="row">
+	         <div class="col-lg-6">
+	    		<div class="input-group">
+	      			<input type="text" name="authId" id="authorName" class="form-control" placeholder="Znajdz po autorze...">
+	      			<span class="input-group-btn">
+	        			<button class="btn btn-default" type="submit">Szukaj!</button>
+	      			</span>
+	    		</div><!-- /input-group -->
+  			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+         
+         
+        </form>
       </div>
     </div>
     <div class="noteFormAdmin" style="width: 300px;">

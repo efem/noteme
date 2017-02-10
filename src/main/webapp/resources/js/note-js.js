@@ -5,7 +5,6 @@ $(document).ready(function() {
         //alert(personId);
         $.getJSON('showByAuthor/' + authorName, function(note) {
         	$('#dataLoad').empty();
-        //	if (jQuery.isEmptyObject(note)) {
 				if (!$.isArray(note) ||  !note.length ) {
         		$('#dataLoad').append("NOT FOUND");
         	} else {
@@ -17,7 +16,8 @@ $(document).ready(function() {
         e.preventDefault(); // prevent actual form submit
       });
 
-
+	
+	
 	$('#userDetailsByUsernameForm').submit(function(e) {
         var authorNameForDetails = $('#authorNameForDetails').val();
         //alert('A');
@@ -37,26 +37,32 @@ $(document).ready(function() {
         		//roles = roles.substring(1);
 
         		div.append('<p><span class="bold">Username: ' + user.username + '</span></p>');
-        		div.append('<p><span class="bold">Email: ' + user.email);
+        		div.append('<p><span class="bold">Email: ' + user.email + '</span></p>');
         		div.append('<p><span class="bold">Reg Date: ' + user.regDate.year + '-' +
         				getMonthFromName(user.regDate.month) + '-' +
         				checkValueForLessThanTen(user.regDate.dayOfMonth) + ' ' +
         				checkValueForLessThanTen(user.regDate.hour) + ':' +
         				checkValueForLessThanTen(user.regDate.minute) + ':' +
-        				checkValueForLessThanTen(user.regDate.second));
+        				checkValueForLessThanTen(user.regDate.second) + '</span></p>');
 
         		div.append('<p><span class="bold">Last login: ' + user.loginDate.year + '-' +
         				getMonthFromName(user.loginDate.month) + '-' +
         				checkValueForLessThanTen(user.loginDate.dayOfMonth) + ' ' +
         				checkValueForLessThanTen(user.loginDate.hour) + ':' +
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
-        				checkValueForLessThanTen(user.loginDate.second));
+        				checkValueForLessThanTen(user.loginDate.second) + '</span></p>');
 
-						div.append('<p><span class="bold">Roles: ' + printRoles(roles));
+						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span></p>');
 
-        		div.append('<p><span class="bold">Enabled: ' + user.enabled);
-
-        		$('#dataLoad').append(div);
+        		div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
+        		
+			if (user.enabled) {
+        			div.append('<div><form id="toggleUserStatus"><input type="hidden" name="username" value="' + user.username + '" /><input type="submit" value="Disable" /></form></div>');
+        		} else {
+        			div.append('<div><form><input type="hidden" name="username" value="' + user.username + '" /><input type="submit" value="Enable"></form></div>');
+        		}
+        		
+			$('#dataLoad').append(div);
 
         }).error(function() { 
         	$('#dataLoad').append("NOT FOUND");
@@ -64,6 +70,16 @@ $(document).ready(function() {
         	});
         e.preventDefault(); // prevent actual form submit
       });
+
+	//$('#toggleUserStatus').submit(function(e) {
+	$('#toggleUserStatus').on('submit', 'form', function(e) {
+		alert('ENABLED CLICK');
+    	//$.getJSON('toggleUser', function(user) {
+        //    	$("#userEnabled").text("Enabled: " + user.enabled);
+    	//});
+    	e.preventDefault(); // prevent actual form submit
+  	});
+
 
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {

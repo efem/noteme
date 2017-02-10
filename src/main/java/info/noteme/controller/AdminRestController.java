@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import info.noteme.dao.UserDao;
@@ -79,6 +82,17 @@ public class AdminRestController {
 		LOG.info("USYR: " + user);
 		return user;
 
+	}
+	
+	@RequestMapping(value = "/toggleUser", method=RequestMethod.POST)
+	@ResponseBody
+	//public User toggleUserJSON(@RequestBody String username) {
+	public User toggleUserJSON(@RequestBody String username) {
+		LOG.info("USRNAME_TOGGLE: " + username);
+		User user = userService.getUserByUsername(username);
+		
+		LOG.info("USR_TOGGLE: " + user);
+		return user;
 	}
 
 }

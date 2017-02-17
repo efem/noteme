@@ -57,7 +57,7 @@ $(document).ready(function() {
         		div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
         		
 			if (user.enabled) {
-        			div.append('<div><form id="toggleUserStatus"><input type="hidden" name="username" value="' + user.username + '" /><input type="submit" value="Disable" /></form></div>');
+					div.append('<div><input id="btnToggleUser" type="button" value="Toggle" name="'+user.username+'" /></div>');
         		} else {
         			div.append('<div><form><input type="hidden" name="username" value="' + user.username + '" /><input type="submit" value="Enable"></form></div>');
         		}
@@ -71,15 +71,12 @@ $(document).ready(function() {
         e.preventDefault(); // prevent actual form submit
       });
 
-	//$('#toggleUserStatus').submit(function(e) {
-	$('#toggleUserStatus').on('submit', 'form', function(e) {
-		alert('ENABLED CLICK');
-    	//$.getJSON('toggleUser', function(user) {
-        //    	$("#userEnabled").text("Enabled: " + user.enabled);
-    	//});
-    	e.preventDefault(); // prevent actual form submit
-  	});
-
+	$(document).on('click', '#btnToggleUser', function(e) {
+		$.getJSON('toggleUser/' + $('#btnToggleUser').attr('name'), function(user) {
+			$("#userEnabled").text("Enabled: " + user.enabled);
+		});
+		e.preventDefault();
+		});
 
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {

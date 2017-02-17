@@ -54,13 +54,10 @@ $(document).ready(function() {
 
 						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span></p>');
 
-        		div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
-        		
-			if (user.enabled) {
-					div.append('<div><input id="btnToggleUser" type="button" value="Toggle" name="'+user.username+'" /></div>');
-        		} else {
-        			div.append('<div><form><input type="hidden" name="username" value="' + user.username + '" /><input type="submit" value="Enable"></form></div>');
-        		}
+						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
+						
+						div.append('<div><input id="btnToggleUser" type="button" value="Toggle" name="' + user.username + '" /></div>');
+
         		
 			$('#dataLoad').append(div);
 
@@ -74,6 +71,7 @@ $(document).ready(function() {
 	$(document).on('click', '#btnToggleUser', function(e) {
 		$.getJSON('toggleUser/' + $('#btnToggleUser').attr('name'), function(user) {
 			$("#userEnabled").text("Enabled: " + user.enabled);
+			$('#btnToggleUser').val('toSet')
 		});
 		e.preventDefault();
 		});

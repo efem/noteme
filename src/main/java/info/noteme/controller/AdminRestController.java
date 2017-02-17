@@ -84,22 +84,11 @@ public class AdminRestController {
 
 	}
 	
-	/*@RequestMapping(value = "/toggleUser", method=RequestMethod.POST)
-	@ResponseBody
-	//public User toggleUserJSON(@RequestBody String username) {
-	public User toggleUserJSON(@RequestBody String username) {
-		LOG.info("USRNAME_TOGGLE: " + username);
-		User user = userService.getUserByUsername(username);
-		
-		LOG.info("USR_TOGGLE: " + user);
-		return user;
-	}*/
-	
 	
 	@RequestMapping(value = "/toggleUser/{username}")
 	@ResponseBody
 	public User toggleUserJSON(@PathVariable String username) {
-		LOG.info("USRNAME_TOGGLE: " + username);
+		LOG.info("USERE_TOGGLE: " + username);
 		User user = userService.getUserByUsername(username);
 		
 		if (user.isEnabled()) {
@@ -111,7 +100,7 @@ public class AdminRestController {
 		userService.save(user);
 		User userToggled = userService.getUserByUsername(username);
 		
-		LOG.info("USR_TOGGLE: " + userToggled);
+		LOG.info("USER_TOGGLED: " + userToggled);
 		return userToggled;
 	}
 

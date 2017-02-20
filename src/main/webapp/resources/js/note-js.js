@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
 						
-						div.append('<div><input id="btnToggleUser" type="button" value="Toggle" name="' + user.username + '" /></div>');
+						div.append('<div><input id="btnToggleUser" type="button" value="' + setToggleBtnValue(user.enabled) +'" name="' + user.username + '" /></div>');
 
         		
 			$('#dataLoad').append(div);
@@ -71,11 +71,23 @@ $(document).ready(function() {
 	$(document).on('click', '#btnToggleUser', function(e) {
 		$.getJSON('toggleUser/' + $('#btnToggleUser').attr('name'), function(user) {
 			$("#userEnabled").text("Enabled: " + user.enabled);
-			$('#btnToggleUser').val('toSet')
+			$('#btnToggleUser').val(setToggleBtnValue(user.enabled))
 		});
 		e.preventDefault();
 		});
-
+	
+	function setToggleBtnValue($value) {
+		var enabled = $value;
+		var btnValue = '';
+		
+		if (enabled) {
+			btnValue = 'Disable';
+		} else {
+			btnValue = 'Enable';
+		}	return btnValue;
+		
+	}
+	
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {
         	$('#dataLoad').empty();

@@ -76,17 +76,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		});
 	
-	function setToggleBtnValue($value) {
-		var enabled = $value;
-		var btnValue = '';
-		
-		if (enabled) {
-			btnValue = 'Disable';
-		} else {
-			btnValue = 'Enable';
-		}	return btnValue;
-		
-	}
+
 	
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {
@@ -119,7 +109,19 @@ $(document).ready(function() {
 
 		return rolesToHtml;
 	}
-
+	
+	function setToggleBtnValue($value) {
+		var enabled = $value;
+		var btnValue = '';
+		
+		if (enabled) {
+			btnValue = 'Disable';
+		} else {
+			btnValue = 'Enable';
+		}	
+		return btnValue;
+	}
+	
 	function getMonthFromName($name) {
 		var monthHash = {
 			    JANUARY : '01',

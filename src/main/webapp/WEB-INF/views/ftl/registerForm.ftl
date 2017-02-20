@@ -3,6 +3,7 @@
 <@init.spring.showErrors '*', 'errors' />
 <@init.pageInit title="ADD NEW USER" />
 <@init.pageBody>
+<#assign singleRoleList = ["user"]>
 <form name="user" method="POST">
 	<@spring.showErrors "<br>"/>
 	<@init.spring.message code="label.username" /><br>
@@ -13,8 +14,7 @@
 		<@init.spring.formPasswordInput "user.password" /><@init.spring.showErrors "<br>"/><br>
   	<@init.spring.message code="label.password.repeat" /><br>
   		<@init.spring.formPasswordInput "user.passwordVerify" /><@init.spring.showErrors "<br>"/><br>
-	<@init.spring.message code="label.role" /><br>
-		<@init.getRolemacro "roles" user.roles/>
+  		<@init.spring.formInput "user.roles", "name='userRoles' value='user'", 'hidden'/>
   	<input type="submit" value="<@init.spring.message code="label.register" />" />
 </form> 
 </@init.pageBody>

@@ -15,7 +15,7 @@
   	<@init.spring.message code="label.password.repeat" /><br>
   		<@init.spring.formPasswordInput "user.passwordVerify" /><@init.spring.showErrors "<br>"/><br>
   		
- 		<input type="hidden" name="userRoles" value="1" />
+ 		<input type="hidden" name="userRoles" value="user" />
   	<input type="submit" value="<@init.spring.message code="label.register" />" />
 </form> 
 </@init.pageBody>

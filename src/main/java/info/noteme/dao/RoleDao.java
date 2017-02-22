@@ -10,4 +10,6 @@ import info.noteme.domain.Role;
 @Component
 public interface RoleDao extends JpaRepository<Role, Long>{
 	List<Role> findAll();
+	
+	Role findByRolename(String rolename);
 }

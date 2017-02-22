@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import info.noteme.domain.Role;
 import info.noteme.domain.User;
+import info.noteme.helper.UserHelper;
 import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
 import info.noteme.validator.PassValidator;
@@ -78,17 +79,14 @@ public class UserController {
 	public String processRegistration(@Valid User user, Errors errors, @RequestParam("userRoles") String[] roles) {
 		passValidator.validate(user, errors);
 		
-		List<Role> roleList = new ArrayList<>();
-
-		for (int i = 0; i< roles.length; i++) {
-			roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));
-		}
-		user.setRoles(roleList);
-		if (errors.hasErrors()) {
+		user = UserHelper.setUserRoles(user, roles, roleService);
+		
+		/* Wykrzystac w kontrolerze z /Admina do dodawania rol userom
+		 * if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
 			user.setRoles(roleService.findAll());
 			return "registerForm";
-		}
+		}*/
 		
 		LOG.info("USERNAME FROM FORM: " + user.getUsername());
 		userService.save(user);

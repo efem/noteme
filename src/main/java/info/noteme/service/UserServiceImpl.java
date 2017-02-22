@@ -45,7 +45,8 @@ public class UserServiceImpl implements UserService {
 		User userToSave = user;
 		userToSave.setPassword(passwordEncoder.encode(user.getPassword()));
 		userToSave.setRegDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
-		LOG.info("Saving user with password: " + userToSave.getPassword());
+		userToSave.setLoginDate(setDefaultLoginDate(user));
+		LOG.info("Saving user: " + userToSave.getUsername());
 		return userDao.save(userToSave);
 	}
 
@@ -54,6 +55,16 @@ public class UserServiceImpl implements UserService {
 	public User updateLoginDate(User user) {
 		user.setLoginDate(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 		return userDao.save(user);
+	}
+	
+	private LocalDateTime setDefaultLoginDate(User user) {
+		LocalDateTime localDate;
+		if (user.getLoginDate() != null) {
+			localDate = user.getLoginDate();
+		} else {
+			localDate = LocalDateTime.of(1970, 01, 01, 00, 00);  
+		}	
+		return localDate;		
 	}
 	
 	

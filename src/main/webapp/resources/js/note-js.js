@@ -52,7 +52,7 @@ $(document).ready(function() {
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
         				checkValueForLessThanTen(user.loginDate.second) + '</span></p>');
 
-						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" /></p><div id="testDiv"></div>');
+						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" name="' + user.username + '" /></p><div id="testDiv"></div>');
 
 						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
 						
@@ -79,18 +79,12 @@ $(document).ready(function() {
 	$(document).on('click', '#btnGetRoles', function(e) {
 		$.getJSON('getRoles', function(roles) {
 			alert('GET ROLES');
-			//$('#testDiv').append('<@init.getAllRoles "roles" roles/>');
-			var rolesVar = '';
-
+			var div = $('<div></div>').addClass('rolesAllDiv');
+			
     		$.each(roles, function( n, value ) {
-    			if (rolesVar=='') {
-    				rolesVar = value.rolename;
-    			} else {
-    				rolesVar = rolesVar + "|" + value.rolename;
-    			}
-
+    			div.append('<input type="checkbox" name="userRoles" value="' + value.id +'">' + value.rolename + '<br >');
   			});
-    		$('#testDiv').append(rolesVar);
+    		$('#testDiv').append(div);
 		});
 		e.preventDefault();
 		});

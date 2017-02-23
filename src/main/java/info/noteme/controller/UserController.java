@@ -81,12 +81,11 @@ public class UserController {
 		
 		user = UserHelper.setUserRoles(user, roles, roleService);
 		
-		/* Wykrzystac w kontrolerze z /Admina do dodawania rol userom
-		 * if (errors.hasErrors()) {
+		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
-			user.setRoles(roleService.findAll());
+			//user.setRoles(roleService.findAll());
 			return "registerForm";
-		}*/
+		}
 		
 		LOG.info("USERNAME FROM FORM: " + user.getUsername());
 		userService.save(user);

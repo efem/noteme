@@ -48,6 +48,13 @@
 	</#list>
 </#macro>
 
+<#-- MACRO for listing ALL roles-->
+<#macro getAllRoles roles values>
+	<#list values as singleRole>
+		<input type="checkbox" name="userRoles" value="${singleRole.id!""}">${singleRole!""}<br >
+	</#list>
+</#macro>
+
 <#macro setTitle title>
 	<title>${title!""}</title>
 </#macro>

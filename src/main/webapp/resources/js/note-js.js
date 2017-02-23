@@ -52,7 +52,7 @@ $(document).ready(function() {
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
         				checkValueForLessThanTen(user.loginDate.second) + '</span></p>');
 
-						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span></p>');
+						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" /></p><div id="testDiv"></div>');
 
 						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
 						
@@ -76,6 +76,24 @@ $(document).ready(function() {
 		e.preventDefault();
 		});
 	
+	$(document).on('click', '#btnGetRoles', function(e) {
+		$.getJSON('getRoles', function(roles) {
+			alert('GET ROLES');
+			//$('#testDiv').append('<@init.getAllRoles "roles" roles/>');
+			var rolesVar = '';
+
+    		$.each(roles, function( n, value ) {
+    			if (rolesVar=='') {
+    				rolesVar = value.rolename;
+    			} else {
+    				rolesVar = rolesVar + "|" + value.rolename;
+    			}
+
+  			});
+    		$('#testDiv').append(rolesVar);
+		});
+		e.preventDefault();
+		});
 
 	
 	$('#showAllNotesBtn').click(function() {
@@ -94,6 +112,23 @@ $(document).ready(function() {
       });
 
 	function printRoles($roles) {
+		var toExplode = $roles;
+		var rolesToHtml = '';
+		var arr = toExplode.split('|');
+		$.each( arr, function( index, value ){
+    	if (value == 'ADMIN') {
+				rolesToHtml += ' <span class="label label-warning">ADMIN</span> ';
+			} else if (value == 'MOD') {
+				rolesToHtml += ' <span class="label label-info">MOD</span> ';
+			} else if (value == 'USER') {
+				rolesToHtml += ' <span class="label label-success">USER</span> ';
+			}
+		});
+
+		return rolesToHtml;
+	}
+	
+	function printCheckboxRoles($roles) {
 		var toExplode = $roles;
 		var rolesToHtml = '';
 		var arr = toExplode.split('|');

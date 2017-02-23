@@ -12,8 +12,11 @@ public class UserHelper {
 		List<Role> roleList = new ArrayList<>();
 
 		for (int i = 0; i< roles.length; i++) {
-			//roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));
-			roleList.add(roleService.getRoleByName(roles[i]));
+			try {
+				roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));
+			} catch (NumberFormatException nfe) {
+				roleList.add(roleService.getRoleByName(roles[i]));
+			}
 		}
 		user.setRoles(roleList);
 		return user;	

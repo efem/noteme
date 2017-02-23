@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import info.noteme.dao.UserDao;
 import info.noteme.domain.Note;
+import info.noteme.domain.Role;
 import info.noteme.domain.User;
 import info.noteme.service.NoteService;
+import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
 
 @Controller
@@ -32,6 +34,9 @@ public class AdminRestController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	RoleService roleService;
 
 	@RequestMapping(value = "/showAdmin")
 	public String showAdminPageJSON() {
@@ -102,6 +107,15 @@ public class AdminRestController {
 		
 		LOG.info("USER_TOGGLED: " + userToggled);
 		return userToggled;
+	}
+	
+	@RequestMapping(value = "/getRoles")
+	@ResponseBody
+	public List<Role> getRolesJSON() {
+		LOG.info("GET ROLES");
+		List<Role> roles = new ArrayList<Role>();
+		roles = roleService.findAll();
+		return roles;
 	}
 
 }

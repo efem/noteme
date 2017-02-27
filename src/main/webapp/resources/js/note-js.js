@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	var userRoles = [];
+	
 	$('#noteByUsernameForm').submit(function(e) {
         var authorName = $('#authorName').val();
         //alert(personId);
@@ -20,21 +22,22 @@ $(document).ready(function() {
 	
 	$('#userDetailsByUsernameForm').submit(function(e) {
         var authorNameForDetails = $('#authorNameForDetails').val();
-        //alert('A');
+        userRoles = [];
         $('#dataLoad').empty();
         $.getJSON('showAuthorDetails/' + authorNameForDetails, function(user) {
         		var div = $('<div></div>').addClass('userDetailDiv');
         		var roles = '';
-
+         		
         		$.each(user.roles, function( n, value ) {
+        			userRoles.push(value.rolename);
         			if (roles=='') {
-        				roles = value.rolename;
+        				roles = value.rolename;;
         			} else {
         				roles = roles + "|" + value.rolename;
         			}
 
       			});
-        		//roles = roles.substring(1);
+        		//alert("U_R: " + userRoles);
 
         		div.append('<p><span class="bold">Username: ' + user.username + '</span></p>');
         		div.append('<p><span class="bold">Email: ' + user.email + '</span></p>');
@@ -52,7 +55,7 @@ $(document).ready(function() {
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
         				checkValueForLessThanTen(user.loginDate.second) + '</span></p>');
 
-						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" name="' + user.username + '" /></p><div id="testDiv"></div>');
+						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" name="' + user.username + '" /></p><div id="rolesDiv"></div>');
 
 						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
 						
@@ -74,21 +77,28 @@ $(document).ready(function() {
 			$('#btnToggleUser').val(setToggleBtnValue(user.enabled))
 		});
 		e.preventDefault();
-		});
+	});
 	
 	$(document).on('click', '#btnGetRoles', function(e) {
 		$.getJSON('getRoles', function(roles) {
-			alert('GET ROLES');
 			var div = $('<div></div>').addClass('rolesAllDiv');
-			
-    		$.each(roles, function( n, value ) {
-    			div.append('<input type="checkbox" name="userRoles" value="' + value.id +'">' + value.rolename + '<br >');
+			var checked='';
+    		$.each(roles, function( n, role ) {
+    			if(jQuery.inArray(role.rolename, userRoles) !== -1) { checked = 'checked';} else { checked = '';}
+    			div.append('<input type="checkbox" name="userRoles" value="' + role.id +'" ' + checked +'>' + role.rolename + '<br >');
   			});
-    		$('#testDiv').append(div);
+    		$('#rolesDiv').append(div);
+    		$('#rolesDiv').append('<input id="btnSaveRoles" type="button" value="Save" name="saveName" />');
+    		$('#rolesDiv').append('<input id="btnCancelRoles" type="button" value="Cancel" />');
+    		
 		});
 		e.preventDefault();
 		});
-
+	
+	$(document).on('click', '#btnCancelRoles', function(e) {
+		//$('#rolesDiv').hide();
+		$('#rolesDiv').empty();
+	});
 	
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {

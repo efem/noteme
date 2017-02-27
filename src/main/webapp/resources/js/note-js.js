@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	var userRoles = [];
+	var userObject;
 	
 	$('#noteByUsernameForm').submit(function(e) {
         var authorName = $('#authorName').val();
@@ -27,7 +28,8 @@ $(document).ready(function() {
         $.getJSON('showAuthorDetails/' + authorNameForDetails, function(user) {
         		var div = $('<div></div>').addClass('userDetailDiv');
         		var roles = '';
-         		
+        		userObject = user;
+        		alert('USS: ' + userObject.username);
         		$.each(user.roles, function( n, value ) {
         			userRoles.push(value.rolename);
         			if (roles=='') {
@@ -96,7 +98,6 @@ $(document).ready(function() {
 		});
 	
 	$(document).on('click', '#btnCancelRoles', function(e) {
-		//$('#rolesDiv').hide();
 		$('#rolesDiv').empty();
 	});
 	
@@ -116,23 +117,6 @@ $(document).ready(function() {
       });
 
 	function printRoles($roles) {
-		var toExplode = $roles;
-		var rolesToHtml = '';
-		var arr = toExplode.split('|');
-		$.each( arr, function( index, value ){
-    	if (value == 'ADMIN') {
-				rolesToHtml += ' <span class="label label-warning">ADMIN</span> ';
-			} else if (value == 'MOD') {
-				rolesToHtml += ' <span class="label label-info">MOD</span> ';
-			} else if (value == 'USER') {
-				rolesToHtml += ' <span class="label label-success">USER</span> ';
-			}
-		});
-
-		return rolesToHtml;
-	}
-	
-	function printCheckboxRoles($roles) {
 		var toExplode = $roles;
 		var rolesToHtml = '';
 		var arr = toExplode.split('|');

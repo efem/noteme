@@ -19,6 +19,7 @@ import info.noteme.dao.UserDao;
 import info.noteme.domain.Note;
 import info.noteme.domain.Role;
 import info.noteme.domain.User;
+import info.noteme.helper.UserHelper;
 import info.noteme.service.NoteService;
 import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
@@ -116,6 +117,16 @@ public class AdminRestController {
 		List<Role> roles = new ArrayList<Role>();
 		roles = roleService.findAll();
 		return roles;
+	}
+	
+	@RequestMapping(value = "/saveUserForRoles/{username}")
+	@ResponseBody
+	public String saveUserForRolesJSON(@PathVariable String username, @RequestParam("userRoles") String[] roles) {
+		LOG.info("SAVE USER FOR ROLES");
+		User user = userService.getUserByUsername(username);
+		user = UserHelper.setUserRoles(user, roles, roleService);
+		userService.save(user);
+		return "redirect:/user/show/" + user.getUsername();
 	}
 
 }

@@ -83,7 +83,6 @@ public class UserController {
 		
 		if (errors.hasErrors()) {
 			LOG.error("VALIDATION ERROS: " + errors.toString());
-			//user.setRoles(roleService.findAll());
 			return "registerForm";
 		}
 		

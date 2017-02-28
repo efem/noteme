@@ -101,6 +101,12 @@ $(document).ready(function() {
 		$('#rolesDiv').empty();
 	});
 	
+	$(document).on('click', '#btnSaveRoles', function(e) {
+		$.getJSON('saveUserForRoles/' + userObject.username, function() {
+			alert('CLICK SAVE FOR ROLES: ' + userObject.username);
+		});
+	});
+	
 	$('#showAllNotesBtn').click(function() {
         $.getJSON('showAll ', function(note) {
         	$('#dataLoad').empty();

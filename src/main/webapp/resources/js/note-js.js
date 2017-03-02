@@ -85,14 +85,14 @@ $(document).ready(function() {
 		$.getJSON('getRoles', function(roles) {
 			var div = $('<div></div>').addClass('rolesAllDiv');
 			var checked='';
+			var form = $('<form></form>');
     		$.each(roles, function( n, role ) {
     			if(jQuery.inArray(role.rolename, userRoles) !== -1) { checked = 'checked';} else { checked = '';}
-    			div.append('<input type="checkbox" name="userRoles" value="' + role.id +'" ' + checked +'>' + role.rolename + '<br >');
+    			form.append('<input type="checkbox" name="userRoles[]" value="' + role.id +'" ' + checked +'>' + role.rolename + '<br >');
   			});
-    		$('#rolesDiv').append(div);
-    		$('#rolesDiv').append('<input id="btnSaveRoles" type="button" value="Save" name="saveName" />');
-    		$('#rolesDiv').append('<input id="btnCancelRoles" type="button" value="Cancel" />');
-    		
+    		form.append('<input id="btnSaveRoles" type="button" value="Save" name="saveName" />');
+    		form.append('<input id="btnCancelRoles" type="button" value="Cancel" />');
+    		$('#rolesDiv').append(form);
 		});
 		e.preventDefault();
 		});
@@ -102,9 +102,19 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '#btnSaveRoles', function(e) {
-		$.getJSON('saveUserForRoles/' + userObject.username, function() {
+		alert('CLICK SAVE');
+		var dataRoles = { 'userRoles[]' : []};
+		var username = { 'username' : userObject.username};
+		
+		$("input:checked").each(function() {
+			dataRoles['userRoles[]'].push($(this).val());
+		});
+		//alert(dataRoles);
+		var arguments = [username, dataRoles];
+		$.post('saveUserForRoles', arguments, function() {
 			alert('CLICK SAVE FOR ROLES: ' + userObject.username);
 		});
+		//e.preventDefault();
 	});
 	
 	$('#showAllNotesBtn').click(function() {

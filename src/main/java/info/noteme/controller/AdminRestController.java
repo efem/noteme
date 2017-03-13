@@ -121,12 +121,13 @@ public class AdminRestController {
 	
 	@RequestMapping(value = "/saveUserForRoles", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public String saveUserForRolesJSON(@RequestParam("username") String username, @RequestParam("userRoles[]") String roles[]) {
-		LOG.info("SAVE USER FOR ROLES");
-		User user = userService.getUserByUsername(username);
+	//public User saveUserForRolesJSON(@RequestParam("username") String username, @RequestParam("userRoles[]") String roles[]) {
+	public User saveUserForRolesJSON(@RequestParam("userRoles[]") String roles[]) {
+		LOG.info("SU4R");
+		User user = userService.getUserByUsername("xxx");
 		user = UserHelper.setUserRoles(user, roles, roleService);
 		userService.save(user);
-		return "redirect:/user/show/" + user.getUsername();
+		return user;
 	}
 
 }

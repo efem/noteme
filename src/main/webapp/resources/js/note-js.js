@@ -57,7 +57,7 @@ $(document).ready(function() {
         				checkValueForLessThanTen(user.loginDate.minute) + ':' +
         				checkValueForLessThanTen(user.loginDate.second) + '</span></p>');
 
-						div.append('<p><span class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" name="' + user.username + '" /></p><div id="rolesDiv"></div>');
+						div.append('<p><span id = "listRoles" class="bold">Roles: ' + printRoles(roles) + '</span><input id="btnGetRoles" type="button" value="Edit" name="' + user.username + '" /></p><div id="rolesDiv"></div>');
 
 						div.append('<p><span id ="userEnabled" class="bold">Enabled: ' + user.enabled + '</span></p>');
 						
@@ -102,15 +102,16 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '#btnSaveRoles', function(e) {
-		alert('CLICK SAVE');
+		//alert('CLICK SAVE');
 		var checkedRoles = { 'userRoles[]' : []};
 
 		$("input:checked").each(function() {
 			checkedRoles['userRoles[]'].push($(this).val());
 		});
 
-		$.post('saveUserForRoles', checkedRoles, function(user) {
-			alert('CLICK SAVE FOR ROLES: ' + userObject.username);
+		$.post('saveUserForRoles/' + userObject.username, checkedRoles, function(user) {
+			$('#listRoles').empty();
+			$('#listRoles').append("Role: " + printRoles(extractRoles(user)));
 		});
 		//e.preventDefault();
 	});
@@ -129,6 +130,19 @@ $(document).ready(function() {
         	 $('#dataLoad').text(note.content);
         });
       });
+	
+	function extractRoles($user) {
+		var gotUser = $user;
+		var roles = '';
+		$.each(gotUser.roles, function( n, value ) {
+			if (roles=='') {
+				roles = value.rolename;;
+			} else {
+				roles = roles + "|" + value.rolename;
+			}
+		});
+		return roles;
+	}
 
 	function printRoles($roles) {
 		var toExplode = $roles;

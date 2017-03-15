@@ -103,22 +103,13 @@ $(document).ready(function() {
 	
 	$(document).on('click', '#btnSaveRoles', function(e) {
 		alert('CLICK SAVE');
-		//var dataRoles = { 'userRoles[]' : []};
-		//var username = { 'username' : userObject.username};
-		userRoles = [];
-		//var DuserRoles = { 'userRoles[]' : ["USER", "MOD"]};
-		//var DuserRoles = ["USER", "MOD"];
-		
-		var AuserRoles = { 'userRoles[]' : ["USER", "MOD"]};
-		
-		//var userRoles = { 'userRoles[]' : []};
+		var checkedRoles = { 'userRoles[]' : []};
+
 		$("input:checked").each(function() {
-			//userRoles['userRoles[]'].push($(this).val());
-			//userRoles.push($(this).val());
+			checkedRoles['userRoles[]'].push($(this).val());
 		});
-		//alert(dataRoles);
-		//var arguments = [username, dataRoles];
-		$.post('saveUserForRoles', { 'userRoles[]' : ["USER", "MOD"]}, function(user) {
+
+		$.post('saveUserForRoles', checkedRoles, function(user) {
 			alert('CLICK SAVE FOR ROLES: ' + userObject.username);
 		});
 		//e.preventDefault();

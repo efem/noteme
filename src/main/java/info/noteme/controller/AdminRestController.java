@@ -121,9 +121,7 @@ public class AdminRestController {
 	
 	@RequestMapping(value = "/saveUserForRoles/{username}", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	//public User saveUserForRolesJSON(@RequestParam("username") String username, @RequestParam("userRoles[]") String roles[]) {
-	public User saveUserForRolesJSON(@PathVariable("username") String username, @RequestParam("userRoles[]") String roles[]) {
-		LOG.info("SU4R");
+	public User saveUserForRolesJSON(@PathVariable("username") String username, @RequestParam(value = "userRoles[]", required = false) String roles[]) {
 		User user = userService.getUserByUsername("xxx");
 		user = UserHelper.setUserRoles(user, roles, roleService);
 		userService.save(user);

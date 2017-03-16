@@ -10,7 +10,12 @@ import info.noteme.service.RoleService;
 public class UserHelper {	
 	public static User setUserRoles(User user, String[] roles, RoleService roleService) {
 		List<Role> roleList = new ArrayList<>();
-
+		
+		if (roles == null) {
+			String dummyRole[] = {"USER"};
+			roles = dummyRole;
+		}
+		
 		for (int i = 0; i< roles.length; i++) {
 			try {
 				roleList.add(roleService.getRoleById(Long.parseLong(roles[i])));

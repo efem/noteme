@@ -119,6 +119,16 @@ public class AdminRestController {
 		return roles;
 	}
 	
+	@RequestMapping(value = "/getRolesForUser/{username}")
+	@ResponseBody
+	public List<Role> getRolesForUserJSON(@PathVariable String username) {
+		LOG.info("GET ROLES FOR USER");
+		List<Role> roles = new ArrayList<Role>();
+		roles = userService.getUserByUsername(username).getRoles();
+		LOG.info("RLS: " + roles.toString());
+		return roles;
+	}
+	
 	@RequestMapping(value = "/saveUserForRoles/{username}", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public User saveUserForRolesJSON(@PathVariable("username") String username, @RequestParam(value = "userRoles[]", required = false) String roles[]) {

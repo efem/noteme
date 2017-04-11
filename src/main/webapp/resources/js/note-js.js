@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	var userRoles = [];
 	var userObject;
+	var sessionUser;
 	
 	$('#noteByUsernameForm').submit(function(e) {
         var authorName = $('#authorName').val();
@@ -29,9 +30,10 @@ $(document).ready(function() {
         		var div = $('<div></div>').addClass('userDetailDiv');
         		var roles = '';
         		userObject = user;
+        		sessionUser = user;
         		alert('USS: ' + userObject.username);
         		$.each(user.roles, function( n, value ) {
-        			userRoles.push(value.rolename);
+        			//userRoles.push(value.rolename);
         			if (roles=='') {
         				roles = value.rolename;;
         			} else {
@@ -82,12 +84,17 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '#btnGetRoles', function(e) {
+		$('#rolesDiv').empty();
 		$.getJSON('getRoles', function(roles) {
-			var div = $('<div></div>').addClass('rolesAllDiv');
-			var checked='';
+			var checked = '';
 			var form = $('<form></form>');
+			var sessionRoles = [];
+			sessionRoles = getRolesNamesForUser(); //nie wypelnia
+			alert('sessionRoles' + JSON.stringify(sessionRoles));
+			alert('controllerRoles' + JSON.stringify(roles));
     		$.each(roles, function( n, role ) {
-    			if(jQuery.inArray(role.rolename, userRoles) !== -1) { checked = 'checked';} else { checked = '';}
+    			if(jQuery.inArray(role.rolename, sessionRoles) !== -1) { checked = 'checked';} else { checked = '';}
+    			alert('role.rolename from controller: ' + role.rolename);
     			form.append('<input type="checkbox" name="userRoles[]" value="' + role.id +'" ' + checked +'>' + role.rolename + '<br >');
   			});
     		form.append('<input id="btnSaveRoles" type="button" value="Save" name="saveName" />');
@@ -97,6 +104,17 @@ $(document).ready(function() {
 		e.preventDefault();
 		});
 	
+	function getRolesNamesForUser() {
+		alert('Username from getRolesNamesForUser: ' + sessionUser.username);
+		userRoles = [];
+		$.getJSON('getRolesForUser/' + sessionUser.username, function(roles) {
+			$.each(roles, function( n, value ) {
+				alert('Rola z kontrolera dla sessionUser: ' + value.rolename);
+				userRoles.push(value.rolename);
+			});
+		});
+		return userRoles;
+	}
 	$(document).on('click', '#btnCancelRoles', function(e) {
 		$('#rolesDiv').empty();
 	});
@@ -112,7 +130,8 @@ $(document).ready(function() {
 		$.post('saveUserForRoles/' + userObject.username, checkedRoles, function(user) {
 			$('#listRoles').empty();
 			$('#listRoles').append("Role: " + printRoles(extractRoles(user)));
-		});
+		});	
+		$('#rolesDiv').empty();
 		//e.preventDefault();
 	});
 	
@@ -130,6 +149,8 @@ $(document).ready(function() {
         	 $('#dataLoad').text(note.content);
         });
       });
+
+
 	
 	function extractRoles($user) {
 		var gotUser = $user;

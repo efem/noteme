@@ -107,12 +107,15 @@ $(document).ready(function() {
 	function getRolesNamesForUser() {
 		alert('Username from getRolesNamesForUser: ' + sessionUser.username);
 		userRoles = [];
-		$.getJSON('getRolesForUser/' + sessionUser.username, function(roles) {
-			$.each(roles, function( n, value ) {
+		$.getJSON('getRolesForUser/' + sessionUser.username, function(rls) {
+			alert('ControllernROLES' + JSON.stringify(rls));
+			$.each(rls, function( n, value ) {
 				alert('Rola z kontrolera dla sessionUser: ' + value.rolename);
 				userRoles.push(value.rolename);
 			});
-		});
+		}).error(function() { 
+   		 	alert('EMPTY getRolesNamesForUser');
+        });
 		return userRoles;
 	}
 	$(document).on('click', '#btnCancelRoles', function(e) {

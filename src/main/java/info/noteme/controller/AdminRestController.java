@@ -119,7 +119,7 @@ public class AdminRestController {
 		return roles;
 	}
 	
-	@RequestMapping(value = "/getRolesForUser/{username}")
+	@RequestMapping(value = "/getRolesForUser/{username}", produces="application/json")
 	@ResponseBody
 	public List<Role> getRolesForUserJSON(@PathVariable String username) {
 		LOG.info("GET ROLES FOR USER");

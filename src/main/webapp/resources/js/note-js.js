@@ -3,11 +3,12 @@ $(document).ready(function() {
 	var userRoles = [];
 	var userObject;
 	var sessionUser;
+	var sessionRoles = [];
 	
 	$('#noteByUsernameForm').submit(function(e) {
         var authorName = $('#authorName').val();
         //alert(personId);
-        $.getJSON('showByAuthor/' + authorName, function(note) {
+        $.getJSON('../adminApi/showByAuthor/' + authorName, function(note) {
         	$('#dataLoad').empty();
 				if (!$.isArray(note) ||  !note.length ) {
         		$('#dataLoad').append("NOT FOUND");
@@ -26,7 +27,7 @@ $(document).ready(function() {
         var authorNameForDetails = $('#authorNameForDetails').val();
         userRoles = [];
         $('#dataLoad').empty();
-        $.getJSON('showAuthorDetails/' + authorNameForDetails, function(user) {
+        $.getJSON('../adminApi/showAuthorDetails/' + authorNameForDetails, function(user) {
         		var div = $('<div></div>').addClass('userDetailDiv');
         		var roles = '';
         		userObject = user;
@@ -76,7 +77,7 @@ $(document).ready(function() {
       });
 
 	$(document).on('click', '#btnToggleUser', function(e) {
-		$.getJSON('toggleUser/' + $('#btnToggleUser').attr('name'), function(user) {
+		$.getJSON('../adminApi/toggleUser/' + $('#btnToggleUser').attr('name'), function(user) {
 			$("#userEnabled").text("Enabled: " + user.enabled);
 			$('#btnToggleUser').val(setToggleBtnValue(user.enabled))
 		});
@@ -85,17 +86,24 @@ $(document).ready(function() {
 	
 	$(document).on('click', '#btnGetRoles', function(e) {
 		$('#rolesDiv').empty();
-		$.getJSON('getRoles', function(roles) {
+		$.getJSON('../adminApi/getRoles', function(roles) {
 			var checked = '';
 			var form = $('<form></form>');
 			var sessionRoles = [];
-			sessionRoles = getRolesNamesForUser(); //nie wypelnia
+			var namedRoles = [];
+			//sessionRoles = getRolesNamesForUser(); //nie wypelnia
+			namedRoles = getRolesFromJson(roles);
 			alert('sessionRoles' + JSON.stringify(sessionRoles));
 			alert('controllerRoles' + JSON.stringify(roles));
-    		$.each(roles, function( n, role ) {
-    			if(jQuery.inArray(role.rolename, sessionRoles) !== -1) { checked = 'checked';} else { checked = '';}
-    			alert('role.rolename from controller: ' + role.rolename);
-    			form.append('<input type="checkbox" name="userRoles[]" value="' + role.id +'" ' + checked +'>' + role.rolename + '<br >');
+			alert('namedRoles' + JSON.stringify(namedRoles));
+    		$.each(namedRoles, function( n, role ) {
+    			if(jQuery.inArray(role, sessionRoles) !== -1) {
+    				checked = 'checked';
+    			} else { 
+    				checked = '';
+    			}
+    			alert('role.rolename from controller: ' + role);
+    			form.append('<input type="checkbox" name="userRoles[]" value="' + role +'" ' + checked +'>' + role + '<br >');
   			});
     		form.append('<input id="btnSaveRoles" type="button" value="Save" name="saveName" />');
     		form.append('<input id="btnCancelRoles" type="button" value="Cancel" />');
@@ -107,14 +115,12 @@ $(document).ready(function() {
 	function getRolesNamesForUser() {
 		alert('Username from getRolesNamesForUser: ' + sessionUser.username);
 		userRoles = [];
-		$.getJSON('getRolesForUser/' + sessionUser.username, function(rls) {
+		$.getJSON('../adminApi/getRolesForUser/' + sessionUser.username, function(rls) {
 			alert('ControllernROLES' + JSON.stringify(rls));
 			$.each(rls, function( n, value ) {
 				alert('Rola z kontrolera dla sessionUser: ' + value.rolename);
 				userRoles.push(value.rolename);
 			});
-		}).error(function() { 
-   		 	alert('EMPTY getRolesNamesForUser');
         });
 		return userRoles;
 	}
@@ -130,7 +136,7 @@ $(document).ready(function() {
 			checkedRoles['userRoles[]'].push($(this).val());
 		});
 
-		$.post('saveUserForRoles/' + userObject.username, checkedRoles, function(user) {
+		$.post('../adminApi/saveUserForRoles/' + userObject.username, checkedRoles, function(user) {
 			$('#listRoles').empty();
 			$('#listRoles').append("Role: " + printRoles(extractRoles(user)));
 		});	
@@ -139,7 +145,7 @@ $(document).ready(function() {
 	});
 	
 	$('#showAllNotesBtn').click(function() {
-        $.getJSON('showAll ', function(note) {
+        $.getJSON('../adminApi/showAll ', function(note) {
         	$('#dataLoad').empty();
         	$.each(note, function(i, field) {
 				$('#dataLoad').append('<div id="divNote'+ i +'" >' + field.content + '</div>');
@@ -148,12 +154,18 @@ $(document).ready(function() {
       });
 
 	$('#showOneNoteBtn').click(function() {
-        $.getJSON('showOne ', function(note) {
+        $.getJSON('../adminApi/showOne ', function(note) {
         	 $('#dataLoad').text(note.content);
         });
       });
 
-
+	function getRolesFromJson($roles) {
+		var rolesExtracted = [];
+		$.each($roles, function( n, roleObj ) {
+			rolesExtracted.push(roleObj.rolename);
+		});
+		return rolesExtracted;
+	}
 	
 	function extractRoles($user) {
 		var gotUser = $user;

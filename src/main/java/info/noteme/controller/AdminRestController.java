@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import info.noteme.dao.UserDao;
 import info.noteme.domain.Note;
@@ -24,8 +25,9 @@ import info.noteme.service.NoteService;
 import info.noteme.service.RoleService;
 import info.noteme.service.UserService;
 
-@Controller
-@RequestMapping("/admin")
+//@Controller
+@RestController
+@RequestMapping("/adminApi")
 public class AdminRestController {
 
 	static final Logger LOG = LoggerFactory.getLogger(AdminRestController.class);
@@ -38,14 +40,6 @@ public class AdminRestController {
 	
 	@Autowired
 	RoleService roleService;
-
-	@RequestMapping(value = "/showAdmin")
-	public String showAdminPageJSON() {
-
-		LOG.info("SHOW MAIN ADMIN PAGE");
-		return "showAdmin";
-
-	}
 
 	@RequestMapping(value = "/showOne")
 	@ResponseBody
@@ -81,11 +75,11 @@ public class AdminRestController {
 	}
 
 	@RequestMapping(value = "/showAuthorDetails/{username}")
-	@ResponseBody
+	//@ResponseBody
 	public User getAuthorByUsernameJSON(@PathVariable String username) {
 		User user = userService.getUserByUsername(username);
-		LOG.info("USRNAME: " + username);
-		LOG.info("USYR: " + user);
+		LOG.info("SHOW_AUTHOR_DETAILS-NAME: " + username);
+		LOG.info("SHOW_AUTHOR_DETAILS-USER: " + user);
 		return user;
 
 	}
@@ -119,8 +113,8 @@ public class AdminRestController {
 		return roles;
 	}
 	
-	@RequestMapping(value = "/getRolesForUser/{username}", produces="application/json")
-	@ResponseBody
+	@RequestMapping(value = "/getRolesForUser/{username}")
+	//@ResponseBody
 	public List<Role> getRolesForUserJSON(@PathVariable String username) {
 		LOG.info("GET ROLES FOR USER");
 		List<Role> roles = new ArrayList<Role>();

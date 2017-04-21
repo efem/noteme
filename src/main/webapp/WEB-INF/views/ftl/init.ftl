@@ -30,7 +30,7 @@
   <li role="presentation"><a href="/noteme/">Home</a></li>
   <li role="presentation"><a href="user/register"><@init.spring.message "label.register" /></a></li>
   <li role="presentation"><a href="user/login">Login</a></li>
-  <li role="presentation"><a href="admin/showAdmin">ADMIN</a></li>
+  <li role="presentation"><a href="admin/show">ADMIN</a></li>
   <li role="presentation" class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
     <ul class="dropdown-menu">
